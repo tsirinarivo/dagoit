@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       "Maîtrisez votre flotte en temps réel. Solutions GPS professionnelles pour entreprises malgaches.",
     images: [
       {
-        url: "/images/og/og-default.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "DAGO IT — Géolocalisation GPS Madagascar",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DAGO IT — Géolocalisation GPS Madagascar",
     description: "Maîtrisez votre flotte en temps réel.",
-    images: ["/images/og/og-default.png"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -82,14 +82,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/icons/apple-touch-icon.png",
-  },
-  manifest: "/site.webmanifest",
 };
 
 export const viewport: Viewport = {
