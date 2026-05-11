@@ -16,32 +16,9 @@ export default function OGImage() {
           alignItems: "flex-start",
           justifyContent: "center",
           padding: "80px",
-          fontFamily: "sans-serif",
           position: "relative",
         }}
       >
-        {/* Grid pattern */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "linear-gradient(rgba(0,229,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.05) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        {/* Glow */}
-        <div
-          style={{
-            position: "absolute",
-            top: -100,
-            right: -100,
-            width: 600,
-            height: 600,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,229,255,0.15) 0%, transparent 70%)",
-          }}
-        />
         {/* Badge */}
         <div
           style={{
@@ -55,27 +32,25 @@ export default function OGImage() {
             marginBottom: 32,
           }}
         >
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#00E5FF" }} />
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#00E5FF", display: "flex" }} />
           <span style={{ color: "#00E5FF", fontSize: 18, fontWeight: 600 }}>DAGO IT — Madagascar</span>
         </div>
-        {/* Title */}
-        <div
-          style={{
-            fontSize: 72,
-            fontWeight: 900,
-            color: "#ffffff",
-            lineHeight: 1.05,
-            marginBottom: 24,
-            maxWidth: 800,
-          }}
-        >
-          Géolocalisation GPS &{" "}
-          <span style={{ color: "#00E5FF" }}>Solutions Tech</span>
+
+        {/* Title line 1 */}
+        <div style={{ fontSize: 68, fontWeight: 900, color: "#ffffff", lineHeight: 1.05, marginBottom: 8, display: "flex" }}>
+          Géolocalisation GPS
         </div>
+
+        {/* Title line 2 */}
+        <div style={{ fontSize: 68, fontWeight: 900, color: "#00E5FF", lineHeight: 1.05, marginBottom: 28, display: "flex" }}>
+          & Solutions Tech
+        </div>
+
         {/* Description */}
-        <div style={{ fontSize: 28, color: "rgba(255,255,255,0.6)", maxWidth: 700, lineHeight: 1.4 }}>
+        <div style={{ fontSize: 26, color: "rgba(255,255,255,0.6)", maxWidth: 700, lineHeight: 1.4, display: "flex" }}>
           Suivez votre flotte en temps réel. Hébergement web. Alarmes. Antananarivo, Madagascar.
         </div>
+
         {/* URL */}
         <div
           style={{
@@ -84,7 +59,7 @@ export default function OGImage() {
             left: 80,
             fontSize: 22,
             color: "rgba(255,255,255,0.35)",
-            fontFamily: "monospace",
+            display: "flex",
           }}
         >
           dago-it.com
