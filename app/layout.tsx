@@ -24,10 +24,11 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dago-it.com";
+const siteUrl = rawSiteUrl.startsWith("http") ? rawSiteUrl : `https://${rawSiteUrl}`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://dago-it.com"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     template: "%s | DAGO IT — Solutions Tech Madagascar",
     default: "DAGO IT — Géolocalisation GPS & Solutions Tech Madagascar",
