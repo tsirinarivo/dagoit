@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@react-three/drei"],
+    // Limite les workers pour hébergement mutualisé CloudLinux (évite EAGAIN)
+    workerThreads: false,
+    cpus: 1,
   },
   images: {
     formats: ["image/avif", "image/webp"],
