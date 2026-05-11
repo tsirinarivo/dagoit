@@ -3,14 +3,8 @@ services:
     build: .
     container_name: dagoit
     restart: unless-stopped
-    expose:
-      - "3000"
+    ports:
+      - "127.0.0.1:8085:3000"
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_SITE_URL=https://dago-it.com
-    networks:
-      - web
-
-networks:
-  web:
-    external: true
