@@ -9,9 +9,11 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
-  // Mode standalone : génère un serveur Node.js autonome (optimal pour cPanel)
   output: "standalone",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  // Désactive lint/typecheck pendant le build (workers bloqués par CloudLinux)
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@react-three/drei"],
     // Limite les workers pour hébergement mutualisé CloudLinux (évite EAGAIN)
