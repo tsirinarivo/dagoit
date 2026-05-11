@@ -11,14 +11,8 @@ const withMDX = createMDX({
 const nextConfig: NextConfig = {
   output: "standalone",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  // Désactive lint/typecheck pendant le build (workers bloqués par CloudLinux)
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@react-three/drei"],
-    // Limite les workers pour hébergement mutualisé CloudLinux (évite EAGAIN)
-    workerThreads: false,
-    cpus: 1,
   },
   images: {
     formats: ["image/avif", "image/webp"],
@@ -27,7 +21,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "dago-hosting.com" },
     ],
   },
-  // Headers de sécurité
   async headers() {
     return [
       {

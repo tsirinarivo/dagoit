@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";

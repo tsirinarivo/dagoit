@@ -1,6 +1,3 @@
-// Force dynamic rendering to avoid static generation worker crashes on CloudLinux
-export const dynamic = "force-dynamic";
-
 import { Header } from "@/components/organisms/Header";
 import { Footer } from "@/components/organisms/Footer";
 import { CartDrawer } from "@/components/organisms/CartDrawer";

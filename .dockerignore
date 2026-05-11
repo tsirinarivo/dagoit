@@ -1,0 +1,13 @@
+.next
+node_modules
+.git
+.gitignore
+.env*.local
+Dockerfile
+docker-compose.yml
+README.md
+MIGRATION.md
+DESIGN-SYSTEM.md
+*.md
+.playwright
+.vitest
