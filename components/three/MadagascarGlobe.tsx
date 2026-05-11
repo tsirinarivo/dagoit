@@ -1,0 +1,370 @@
+"use client";
+
+import { useRef, useMemo, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls, Stars } from "@react-three/drei";
+import * as THREE from "three";
+import { MADAGASCAR_CITIES, GPS_ROUTES } from "@/lib/constants/cities";
+
+// ── Coordonnées géographiques → position sur sphère ──────────────────────────
+function latLngToVec3(lat: number, lng: number, radius: number): THREE.Vector3 {
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lng + 180) * (Math.PI / 180);
+  return new THREE.Vector3(
+    -radius * Math.sin(phi) * Math.cos(theta),
+    radius * Math.cos(phi),
+    radius * Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+// ── Ping GPS pulsant ──────────────────────────────────────────────────────────
+function GPSPing({
+  position,
+  color = "#00E5FF",
+  isCapital = false,
+}: {
+  position: THREE.Vector3;
+  color?: string;
+  isCapital?: boolean;
+}) {
+  const ringRef = useRef<THREE.Mesh>(null);
+  const ring2Ref = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const scale = 1 + (Math.sin(t * 2) * 0.5 + 0.5) * (isCapital ? 1.5 : 0.8);
+    const opacity = 1 - (Math.sin(t * 2) * 0.5 + 0.5) * 0.7;
+
+    if (ringRef.current) {
+      ringRef.current.scale.setScalar(scale);
+      (ringRef.current.material as THREE.MeshBasicMaterial).opacity = opacity;
+    }
+    if (ring2Ref.current) {
+      const scale2 = 1 + ((Math.sin(t * 2 + Math.PI) * 0.5 + 0.5)) * (isCapital ? 1.2 : 0.6);
+      ring2Ref.current.scale.setScalar(scale2);
+      (ring2Ref.current.material as THREE.MeshBasicMaterial).opacity =
+        1 - ((Math.sin(t * 2 + Math.PI) * 0.5 + 0.5)) * 0.7;
+    }
+  });
+
+  const size = isCapital ? 0.025 : 0.015;
+
+  return (
+    <group position={position}>
+      {/* Point central */}
+      <mesh>
+        <sphereGeometry args={[size, 8, 8]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+
+      {/* Anneau pulsant 1 */}
+      <mesh ref={ringRef}>
+        <ringGeometry args={[size * 1.5, size * 2.2, 16]} />
+        <meshBasicMaterial
+          color={color}
+          transparent
+          opacity={0.6}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+
+      {/* Anneau pulsant 2 (décalé) */}
+      <mesh ref={ring2Ref}>
+        <ringGeometry args={[size * 2, size * 3, 16]} />
+        <meshBasicMaterial
+          color={color}
+          transparent
+          opacity={0.3}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+// ── Ligne de trajet animée entre deux villes ──────────────────────────────────
+function GPSRoute({
+  from,
+  to,
+  radius,
+  progress,
+}: {
+  from: THREE.Vector3;
+  to: THREE.Vector3;
+  radius: number;
+  progress: number;
+}) {
+  const points = useMemo(() => {
+    const count = 32;
+    const pts: THREE.Vector3[] = [];
+    for (let i = 0; i <= count; i++) {
+      const t = i / count;
+      // Arc de grand cercle avec hauteur
+      const p = from.clone().lerp(to, t).normalize();
+      const alt = Math.sin(Math.PI * t) * radius * 0.12;
+      pts.push(p.multiplyScalar(radius + alt));
+    }
+    return pts;
+  }, [from, to, radius]);
+
+  const geometry = useMemo(() => {
+    const count = Math.floor(points.length * progress);
+    if (count < 2) return null;
+    const visible = points.slice(0, count);
+    return new THREE.BufferGeometry().setFromPoints(visible);
+  }, [points, progress]);
+
+  if (!geometry) return null;
+
+  return (
+    <line>
+      <primitive object={geometry} attach="geometry" />
+      <lineBasicMaterial color="#00E5FF" transparent opacity={0.4} linewidth={1} />
+    </line>
+  );
+}
+
+// ── Particules de données voyageant sur les routes ────────────────────────────
+function DataParticle({
+  from,
+  to,
+  radius,
+  speed = 0.3,
+  offset = 0,
+}: {
+  from: THREE.Vector3;
+  to: THREE.Vector3;
+  radius: number;
+  speed?: number;
+  offset?: number;
+}) {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  const points = useMemo(() => {
+    const pts: THREE.Vector3[] = [];
+    for (let i = 0; i <= 32; i++) {
+      const t = i / 32;
+      const p = from.clone().lerp(to, t).normalize();
+      const alt = Math.sin(Math.PI * t) * radius * 0.12;
+      pts.push(p.multiplyScalar(radius + alt));
+    }
+    return pts;
+  }, [from, to, radius]);
+
+  useFrame(({ clock }) => {
+    const t = ((clock.getElapsedTime() * speed + offset) % 1);
+    const idx = Math.floor(t * (points.length - 1));
+    if (meshRef.current && points[idx]) {
+      meshRef.current.position.copy(points[idx]);
+    }
+  });
+
+  return (
+    <mesh ref={meshRef}>
+      <sphereGeometry args={[0.012, 6, 6]} />
+      <meshBasicMaterial color="#A3FF12" />
+    </mesh>
+  );
+}
+
+// ── Globe principal ───────────────────────────────────────────────────────────
+function Globe() {
+  const groupRef = useRef<THREE.Group>(null);
+  const RADIUS = 1.8;
+
+  // Rotation automatique douce
+  useFrame((_, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.06;
+    }
+  });
+
+  // Positions des villes
+  const cityPositions = useMemo(
+    () =>
+      MADAGASCAR_CITIES.map((city) =>
+        latLngToVec3(city.lat, city.lng, RADIUS + 0.01)
+      ),
+    []
+  );
+
+  // Positions pour les routes (indexées par city.id)
+  const cityPosMap = useMemo(() => {
+    const map: Record<string, THREE.Vector3> = {};
+    MADAGASCAR_CITIES.forEach((city) => {
+      map[city.id] = latLngToVec3(city.lat, city.lng, RADIUS + 0.01);
+    });
+    return map;
+  }, []);
+
+  // Grille de méridiens/parallèles
+  const gridLines = useMemo(() => {
+    const lines: THREE.BufferGeometry[] = [];
+
+    // Méridiens (lignes verticales)
+    for (let lng = -180; lng <= 180; lng += 30) {
+      const pts: THREE.Vector3[] = [];
+      for (let lat = -90; lat <= 90; lat += 5) {
+        pts.push(latLngToVec3(lat, lng, RADIUS));
+      }
+      lines.push(new THREE.BufferGeometry().setFromPoints(pts));
+    }
+
+    // Parallèles (lignes horizontales)
+    for (let lat = -60; lat <= 60; lat += 30) {
+      const pts: THREE.Vector3[] = [];
+      for (let lng = -180; lng <= 180; lng += 5) {
+        pts.push(latLngToVec3(lat, lng, RADIUS));
+      }
+      // Fermer la boucle
+      pts.push(pts[0]);
+      lines.push(new THREE.BufferGeometry().setFromPoints(pts));
+    }
+
+    return lines;
+  }, []);
+
+  return (
+    <group ref={groupRef}>
+      {/* Sphère principale */}
+      <mesh>
+        <sphereGeometry args={[RADIUS, 64, 64]} />
+        <meshPhongMaterial
+          color="#0a1628"
+          emissive="#071020"
+          shininess={20}
+          transparent
+          opacity={0.95}
+        />
+      </mesh>
+
+      {/* Halo atmosphérique */}
+      <mesh>
+        <sphereGeometry args={[RADIUS * 1.02, 32, 32]} />
+        <meshBasicMaterial
+          color="#00E5FF"
+          transparent
+          opacity={0.025}
+          side={THREE.BackSide}
+        />
+      </mesh>
+
+      {/* Grille de coordonnées */}
+      {gridLines.map((geo, i) => (
+        <line key={i}>
+          <primitive object={geo} attach="geometry" />
+          <lineBasicMaterial
+            color="#1a4080"
+            transparent
+            opacity={0.25}
+          />
+        </line>
+      ))}
+
+      {/* Routes GPS avec animation */}
+      {GPS_ROUTES.map((route, i) => {
+        const from = cityPosMap[route.from];
+        const to = cityPosMap[route.to];
+        if (!from || !to) return null;
+        return (
+          <group key={route.from + route.to}>
+            <GPSRoute from={from} to={to} radius={RADIUS} progress={1} />
+            <DataParticle
+              from={from}
+              to={to}
+              radius={RADIUS}
+              speed={0.2 + i * 0.05}
+              offset={i * 0.2}
+            />
+            {/* Particule dans l'autre sens */}
+            <DataParticle
+              from={to}
+              to={from}
+              radius={RADIUS}
+              speed={0.15 + i * 0.04}
+              offset={i * 0.3 + 0.5}
+            />
+          </group>
+        );
+      })}
+
+      {/* Pings GPS des villes */}
+      {MADAGASCAR_CITIES.map((city, i) => (
+        <GPSPing
+          key={city.id}
+          position={cityPositions[i]}
+          color={city.isCapital ? "#A3FF12" : "#00E5FF"}
+          isCapital={city.isCapital}
+        />
+      ))}
+    </group>
+  );
+}
+
+// ── Scène complète ────────────────────────────────────────────────────────────
+function Scene() {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    camera.position.set(0, 0.5, 4.5);
+  }, [camera]);
+
+  return (
+    <>
+      {/* Éclairage */}
+      <ambientLight intensity={0.4} color="#1a3a6f" />
+      <pointLight position={[5, 5, 5]} intensity={1.2} color="#00E5FF" />
+      <pointLight position={[-5, -3, -3]} intensity={0.5} color="#0b3a6f" />
+      <pointLight position={[0, -4, 2]} intensity={0.3} color="#A3FF12" />
+
+      {/* Étoiles d'arrière-plan */}
+      <Stars
+        radius={100}
+        depth={50}
+        count={3000}
+        factor={4}
+        saturation={0.3}
+        fade
+        speed={0.5}
+      />
+
+      <Globe />
+
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        autoRotate={false}
+        minPolarAngle={Math.PI / 4}
+        maxPolarAngle={(3 * Math.PI) / 4}
+        rotateSpeed={0.4}
+        enableDamping
+        dampingFactor={0.06}
+      />
+    </>
+  );
+}
+
+// ── Export du composant ───────────────────────────────────────────────────────
+export function MadagascarGlobe({ className }: { className?: string }) {
+  return (
+    <div
+      className={className}
+      aria-hidden="true"
+      role="presentation"
+      aria-label="Globe 3D de Madagascar avec points GPS animés"
+    >
+      <Canvas
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        }}
+        style={{ background: "transparent" }}
+      >
+        <Scene />
+      </Canvas>
+    </div>
+  );
+}

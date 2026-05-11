@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TAILWIND V4 — DESIGN TOKENS DAGO IT
+   Mode sombre par défaut, switch light disponible
+   ============================================================ */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  /* ── Couleurs primaires ── */
+  --color-primary-950: #060e1c;
+  --color-primary-900: #0a1628;
+  --color-primary-800: #0d1f3c;
+  --color-primary-700: #112850;
+  --color-primary-600: #163264;
+  --color-primary-500: #0b3a6f;
+  --color-primary-400: #1a5291;
+  --color-primary-300: #2d6bb3;
+  --color-primary-200: #5a92cc;
+  --color-primary-100: #a8c8e8;
+  --color-primary-50: #e8f2fc;
+
+  /* ── Accent Cyan électrique ── */
+  --color-cyan-500: #00e5ff;
+  --color-cyan-400: #33ebff;
+  --color-cyan-300: #66f0ff;
+  --color-cyan-200: #99f5ff;
+  --color-cyan-600: #00b8d4;
+  --color-cyan-700: #008fa8;
+
+  /* ── Accent Vert lime ── */
+  --color-lime-500: #a3ff12;
+  --color-lime-400: #b8ff42;
+  --color-lime-300: #ccff72;
+  --color-lime-600: #82cc0e;
+  --color-lime-700: #629909;
+
+  /* ── Accent Orange (terre rouge malgache) ── */
+  --color-orange-500: #ff6b35;
+  --color-orange-400: #ff8c5c;
+  --color-orange-300: #ffad83;
+  --color-orange-600: #e04f1a;
+  --color-orange-700: #b83b10;
+
+  /* ── Neutres ── */
+  --color-slate-950: #020509;
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50: #f8fafc;
+
+  /* Blanc cassé DAGO */
+  --color-offwhite: #f5f7fa;
+
+  /* ── Typographie ── */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Rayons ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+
+  /* ── Ombres ── */
+  --shadow-glow-cyan: 0 0 30px rgba(0, 229, 255, 0.35);
+  --shadow-glow-lime: 0 0 30px rgba(163, 255, 18, 0.35);
+  --shadow-glow-orange: 0 0 30px rgba(255, 107, 53, 0.35);
+  --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 48px rgba(0, 0, 0, 0.6);
+
+  /* ── Transitions ── */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   VARIABLES CSS SÉMANTIQUES (dark = défaut)
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  --bg: #0a1628;
+  --bg-secondary: #0d1f3c;
+  --bg-tertiary: #1e293b;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(0, 229, 255, 0.25);
+  --text-primary: #f5f7fa;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --accent-primary: #00e5ff;
+  --accent-secondary: #a3ff12;
+  --accent-tertiary: #ff6b35;
+}
+
+[data-theme="light"] {
+  --bg: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e2e8f0;
+  --surface: rgba(0, 0, 0, 0.03);
+  --surface-hover: rgba(0, 0, 0, 0.06);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-accent: rgba(11, 58, 111, 0.25);
+  --text-primary: #0a1628;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
+  --accent-primary: #0b3a6f;
+  --accent-secondary: #629909;
+  --accent-tertiary: #e04f1a;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Focus visible accessible */
+  :focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--accent-primary);
+    color: var(--bg);
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    z-index: 9999;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* Scrollbar personnalisée */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+  }
+
+  /* Sélection */
+  ::selection {
+    background: rgba(0, 229, 255, 0.2);
+    color: var(--text-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* ============================================================
+   COMPOSANTS UTILITAIRES
+   ============================================================ */
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Gradient text */
+  .gradient-text-cyan {
+    background: linear-gradient(135deg, #00e5ff 0%, #a3ff12 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, #ff6b35 0%, #00e5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Noise texture overlay */
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Glow border */
+  .glow-border-cyan {
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  }
+
+  /* GPS Ping animation */
+  .gps-ping {
+    position: relative;
+  }
+  .gps-ping::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: rgba(0, 229, 255, 0.3);
+    animation: gps-pulse 2s ease-out infinite;
+  }
+
+  /* Container responsive */
+  .container-dago {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 5vw, 2.5rem);
+  }
+
+  /* Section spacing */
+  .section-py {
+    padding-block: clamp(4rem, 10vw, 8rem);
+  }
+
+  /* Magnetic button area */
+  .btn-magnetic {
+    position: relative;
+    transition: transform 0.3s var(--ease-spring);
+  }
+}
+
+/* ============================================================
+   ANIMATIONS KEYFRAMES
+   ============================================================ */
+@keyframes gps-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION — accessibilité WCAG 2.2 AA
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .gps-ping::before {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   UTILITIES CUSTOM
+   ============================================================ */
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-body    { font-family: var(--font-body); }
+  .font-mono    { font-family: var(--font-mono); }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-dot {
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-scan {
+    animation: scan-line 3s linear infinite;
+  }
+
+  .animate-blink {
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 229, 255, 0.15) 50%,
+      transparent 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+}
