@@ -9,6 +9,8 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  // Mode standalone : génère un serveur Node.js autonome (optimal pour cPanel)
+  output: "standalone",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@react-three/drei"],
