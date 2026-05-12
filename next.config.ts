@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "dago-it.com" },
-      { protocol: "https", hostname: "dago-hosting.com" },
+      { protocol: "https", hostname: "dago-cloud.com" },
     ],
   },
   async headers() {

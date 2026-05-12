@@ -52,6 +52,6 @@ export const CONTACT_INFO = {
   whatsapp: "+261340000000",
   email: "contact@dago-it.com",
   address: "Lot IVT 53, Andraharo, Antananarivo 101, Madagascar",
-  trackingUrl: "https://tracking.dago-it.com",
-  hostingUrl: "https://dago-hosting.com",
+  trackingUrl: "https://app.fleet.mg",
+  hostingUrl: "https://dago-cloud.com",
 };

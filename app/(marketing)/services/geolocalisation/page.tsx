@@ -78,7 +78,7 @@ const FEATURES_DETAIL = [
     icon: <Clock className="h-6 w-6" />,
     title: "Historique complet",
     description:
-      "Rejouez n'importe quel trajet passé. L'historique est conservé 30 jours (Just Track) jusqu'à 5 ans (Sérénité+). Indispensable en cas de litige.",
+      "Rejouez n'importe quel trajet passé. L'historique complet de vos trajets est conservé et consultable à tout moment. Indispensable en cas de litige.",
     color: "lime",
   },
 ];
@@ -139,7 +139,7 @@ const FAQ = [
   },
   {
     q: "Puis-je suivre mes véhicules depuis l'étranger ?",
-    a: "Absolument. La plateforme tracking.dago-it.com est accessible depuis n'importe quel navigateur web dans le monde, et l'application mobile fonctionne partout. Beaucoup de nos clients expatriés gèrent leur flotte depuis l'Europe.",
+    a: "Absolument. La plateforme app.fleet.mg est accessible depuis n'importe quel navigateur web dans le monde, et l'application mobile fonctionne partout. Beaucoup de nos clients expatriés gèrent leur flotte depuis l'Europe.",
   },
   {
     q: "Que se passe-t-il si je veux résilier ?",
@@ -172,10 +172,10 @@ export default function GeolocalisationPage() {
             areaServed: "Madagascar",
             offers: {
               "@type": "AggregateOffer",
-              lowPrice: "32500",
-              highPrice: "95000",
+              lowPrice: "27500",
+              highPrice: "45000",
               priceCurrency: "MGA",
-              offerCount: 4,
+              offerCount: 3,
             },
           }),
         }}

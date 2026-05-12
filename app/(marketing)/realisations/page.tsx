@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 
 const PROJECTS = [
   {
-    client: "Clinique Privée — Antananarivo",
     sector: "Santé",
     service: "GPS & Tracking",
     color: "cyan",
@@ -32,8 +31,7 @@ const PROJECTS = [
     tag: "12 véhicules",
   },
   {
-    client: "Groupe Logistique — Toamasina",
-    sector: "Transport",
+    sector: "Transport & Logistique",
     service: "GPS & Tracking",
     color: "lime",
     challenge: "Flotte de 35 camions sur les routes nationales. Détournements de carburant, retards non justifiés, litiges clients.",
@@ -47,8 +45,7 @@ const PROJECTS = [
     tag: "35 camions",
   },
   {
-    client: "Resort Hôtelier — Nosy Be",
-    sector: "Tourisme",
+    sector: "Tourisme & Hôtellerie",
     service: "Hébergement Web",
     color: "orange",
     challenge: "Site WordPress lent, hébergé en Europe. Temps de chargement >8 secondes depuis Madagascar. Perte de réservations.",
@@ -62,7 +59,6 @@ const PROJECTS = [
     tag: "Migration complète",
   },
   {
-    client: "Groupe Immobilier — Antananarivo",
     sector: "Immobilier",
     service: "Alarme & Sécurité",
     color: "cyan",
@@ -77,8 +73,7 @@ const PROJECTS = [
     tag: "8 sites",
   },
   {
-    client: "ONG Internationale — Fianarantsoa",
-    sector: "Humanitaire",
+    sector: "Humanitaire & ONG",
     service: "GPS & Hébergement",
     color: "lime",
     challenge: "Flotte de terrain (4×4, motos) dans des zones rurales. Sécurité des équipes, rapports bailleurs, gestion des zones d'intervention.",
@@ -92,8 +87,7 @@ const PROJECTS = [
     tag: "Zones rurales",
   },
   {
-    client: "Chaîne de Distribution — Mahajanga",
-    sector: "Commerce",
+    sector: "Commerce & Distribution",
     service: "GPS & Tracking",
     color: "orange",
     challenge: "Livraisons non maîtrisées, clients non livrés, chauffeurs non joignables. Réputation en jeu.",
@@ -168,10 +162,10 @@ export default function RealisationsPage() {
           <div className="flex flex-col gap-8">
             {PROJECTS.map((project, i) => (
               <article
-                key={project.client}
+                key={`${project.sector}-${i}`}
                 className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 lg:p-8 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/20 transition-all duration-200"
               >
-                {/* Infos client */}
+                {/* Infos projet */}
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-2 flex-wrap">
                     <Badge
@@ -182,8 +176,7 @@ export default function RealisationsPage() {
                     <span className="text-xs font-mono text-[var(--text-tertiary)]">{project.tag}</span>
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-[var(--text-primary)]">{project.client}</h3>
-                    <p className="text-xs text-[var(--text-tertiary)] mt-1">Secteur : {project.sector}</p>
+                    <h3 className="font-display font-bold text-[var(--text-primary)]">Secteur {project.sector}</h3>
                   </div>
                   <div>
                     <p className="text-xs font-mono uppercase tracking-wider text-[var(--text-tertiary)] mb-1">Défi</p>
@@ -227,7 +220,7 @@ export default function RealisationsPage() {
           <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
             Contactez-nous pour discuter de votre projet. Audit gratuit, devis sous 24h, installation rapide.
           </p>
-          <Button variant="primary" size="xl" magnetic rightIcon={<ArrowRight className="h-5 w-5" />} asChild>
+          <Button variant="primary" size="xl" rightIcon={<ArrowRight className="h-5 w-5" />} asChild>
             <Link href="/devis">Discuter de mon projet</Link>
           </Button>
         </div>
