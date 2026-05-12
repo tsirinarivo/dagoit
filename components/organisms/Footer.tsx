@@ -91,6 +91,49 @@ export function Footer() {
       />
 
       <div className="container-dago relative">
+        {/* Écosystème DAGO IT */}
+        <div className="border-b border-[var(--border)] py-8">
+          <p className="text-xs font-mono uppercase tracking-widest text-[var(--text-tertiary)] mb-4">
+            Écosystème DAGO IT
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="https://fleet.mg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/40 transition-colors group"
+            >
+              <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center shrink-0">
+                <span className="text-cyan-400 text-xs font-mono font-bold">F</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-cyan-400 transition-colors">
+                  fleet.mg
+                </p>
+                <p className="text-xs text-[var(--text-tertiary)]">Tracking de flotte GPS</p>
+              </div>
+              <ExternalLink className="h-3.5 w-3.5 text-[var(--text-tertiary)] ml-2 group-hover:text-cyan-400 transition-colors" />
+            </a>
+            <a
+              href="https://dago-cloud.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/40 transition-colors group"
+            >
+              <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
+                <span className="text-blue-400 text-xs font-mono font-bold">C</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-cyan-400 transition-colors">
+                  dago-cloud.com
+                </p>
+                <p className="text-xs text-[var(--text-tertiary)]">Hébergement web Madagascar</p>
+              </div>
+              <ExternalLink className="h-3.5 w-3.5 text-[var(--text-tertiary)] ml-2 group-hover:text-cyan-400 transition-colors" />
+            </a>
+          </div>
+        </div>
+
         {/* Bloc principal */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 py-16">
           {/* Colonne entreprise */}

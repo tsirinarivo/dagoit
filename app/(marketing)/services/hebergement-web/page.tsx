@@ -300,6 +300,36 @@ export default function HebergementWebPage() {
         </div>
       </section>
 
+      {/* ── BANNIÈRE DAGO-CLOUD ── */}
+      <section className="container-dago mb-12">
+        <a
+          href="https://dago-cloud.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20 hover:border-blue-500/40 transition-all group"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
+              <span className="text-blue-400 font-mono font-bold text-lg">C</span>
+            </div>
+            <div>
+              <p className="font-semibold text-[var(--text-primary)] group-hover:text-blue-400 transition-colors">
+                Commander votre hébergement → <span className="text-blue-400">dago-cloud.com</span>
+              </p>
+              <p className="text-sm text-[var(--text-tertiary)]">
+                Hébergement made in Madagascar · cPanel · Support francophone · Paiement Mobile Money
+              </p>
+            </div>
+          </div>
+          <span className="text-sm font-medium text-blue-400 whitespace-nowrap flex items-center gap-1 shrink-0">
+            Ouvrir dago-cloud.com
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </span>
+        </a>
+      </section>
+
       <FinalCTA />
     </>
   );
