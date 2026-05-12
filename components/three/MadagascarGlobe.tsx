@@ -167,6 +167,40 @@ function DataParticle({
   );
 }
 
+// ── Contour simplifié de Madagascar ──────────────────────────────────────────
+const MADAGASCAR_COASTLINE: [number, number][] = [
+  [-12.04, 49.25], [-12.38, 49.56], [-12.85, 49.80], [-13.40, 50.08],
+  [-14.10, 50.22], [-14.83, 50.40], [-15.42, 50.34], [-16.16, 50.05],
+  [-16.83, 49.85], [-17.52, 49.75], [-18.15, 49.40], [-18.90, 48.80],
+  [-19.47, 48.57], [-20.04, 48.10], [-20.52, 47.45], [-21.21, 47.23],
+  [-21.85, 47.65], [-22.31, 47.96], [-22.82, 47.82], [-23.35, 47.58],
+  [-23.86, 47.18], [-24.39, 47.05], [-24.89, 46.90], [-25.14, 46.68],
+  [-25.38, 46.35], [-25.60, 45.16], [-25.53, 44.92], [-25.04, 44.51],
+  [-24.58, 43.97], [-24.10, 43.70], [-23.60, 43.22], [-23.06, 43.42],
+  [-22.50, 43.28], [-21.98, 43.62], [-21.40, 43.72], [-20.86, 44.04],
+  [-20.35, 44.30], [-19.93, 44.44], [-19.45, 44.28], [-18.92, 44.12],
+  [-18.40, 44.05], [-17.85, 44.08], [-17.29, 43.92], [-16.75, 44.30],
+  [-16.20, 44.52], [-15.72, 45.98], [-15.14, 47.10], [-14.56, 47.53],
+  [-13.95, 47.87], [-13.43, 48.11], [-13.00, 48.28], [-12.55, 48.78],
+  [-12.22, 49.05], [-12.04, 49.25],
+];
+
+function MadagascarOutline({ radius }: { radius: number }) {
+  const geometry = useMemo(() => {
+    const pts = MADAGASCAR_COASTLINE.map(([lat, lng]) =>
+      latLngToVec3(lat, lng, radius + 0.005)
+    );
+    return new THREE.BufferGeometry().setFromPoints(pts);
+  }, [radius]);
+
+  return (
+    <line>
+      <primitive object={geometry} attach="geometry" />
+      <lineBasicMaterial color="#00E5FF" transparent opacity={0.85} linewidth={2} />
+    </line>
+  );
+}
+
 // ── Globe principal ───────────────────────────────────────────────────────────
 function Globe() {
   const groupRef = useRef<THREE.Group>(null);
@@ -287,6 +321,9 @@ function Globe() {
           </group>
         );
       })}
+
+      {/* Contour de Madagascar */}
+      <MadagascarOutline radius={RADIUS} />
 
       {/* Pings GPS des villes */}
       {MADAGASCAR_CITIES.map((city, i) => (
