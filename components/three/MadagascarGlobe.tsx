@@ -167,6 +167,60 @@ function DataParticle({
   );
 }
 
+// ── Contours des continents voisins ──────────────────────────────────────────
+const AFRICA_COASTLINE: [number, number][] = [
+  [35.9, -5.5], [35.7, -0.6], [36.9, 5.2], [37.1, 9.2], [34.5, 11.1],
+  [31.5, 25.2], [30.9, 32.3], [27.2, 33.8], [22.0, 36.9], [15.0, 41.8],
+  [11.5, 43.1], [10.0, 51.4], [2.4, 45.3], [-1.7, 41.5], [-4.6, 39.7],
+  [-10.5, 40.5], [-15.0, 40.7], [-22.9, 35.5], [-25.9, 32.9],
+  [-29.9, 30.9], [-34.1, 26.8], [-34.8, 20.0], [-34.4, 18.5],
+  [-29.4, 17.1], [-28.6, 15.8], [-22.0, 14.5], [-17.3, 11.8],
+  [-12.4, 13.4], [-5.9, 12.2], [0.0, 9.3], [3.8, 9.4],
+  [5.0, 3.4], [4.9, -1.7], [5.1, -5.0], [4.4, -7.5],
+  [6.9, -11.3], [9.3, -13.7], [10.5, -15.1], [11.9, -16.7],
+  [14.7, -17.5], [20.9, -17.0], [27.7, -13.2], [30.4, -9.8],
+  [33.5, -7.8], [35.9, -5.5],
+];
+
+const ARABIAN_PENINSULA: [number, number][] = [
+  [29.5, 32.5], [28.0, 34.9], [22.5, 37.2], [18.0, 38.5], [12.7, 43.5],
+  [11.8, 43.4], [11.2, 51.3], [22.3, 59.8], [23.7, 58.6], [24.6, 56.4],
+  [25.6, 56.3], [26.1, 56.9], [26.5, 56.4], [27.2, 56.2], [27.9, 57.3],
+  [22.4, 59.9], [19.0, 57.5], [16.9, 53.1], [15.7, 52.2], [14.5, 49.4],
+  [12.7, 45.0], [12.4, 43.5], [11.3, 42.8], [11.5, 43.1],
+  [14.0, 42.5], [16.0, 42.9], [19.0, 41.5], [22.0, 39.2],
+  [24.5, 37.3], [27.5, 35.5], [29.5, 34.9], [30.0, 33.0], [29.5, 32.5],
+];
+
+const INDIAN_SUBCONTINENT: [number, number][] = [
+  [24.0, 68.0], [22.5, 68.9], [20.7, 71.0], [16.8, 73.3], [14.8, 74.1],
+  [8.1, 77.3], [8.1, 77.6], [9.2, 79.9], [10.6, 79.9], [13.4, 80.3],
+  [15.9, 80.6], [19.3, 85.1], [20.3, 86.8], [21.5, 87.4],
+  [22.2, 88.1], [21.6, 88.7], [22.8, 89.6], [23.3, 91.4],
+  [24.9, 89.8], [26.3, 89.4], [26.6, 88.1], [27.5, 88.1],
+  [27.5, 87.1], [28.3, 84.2], [27.4, 80.6], [26.4, 74.5],
+  [24.0, 68.0],
+];
+
+function ContinentOutline({ coords, radius, color, opacity }: {
+  coords: [number, number][];
+  radius: number;
+  color: string;
+  opacity: number;
+}) {
+  const geometry = useMemo(() => {
+    const pts = coords.map(([lat, lng]) => latLngToVec3(lat, lng, radius + 0.004));
+    return new THREE.BufferGeometry().setFromPoints(pts);
+  }, [coords, radius]);
+
+  return (
+    <line>
+      <primitive object={geometry} attach="geometry" />
+      <lineBasicMaterial color={color} transparent opacity={opacity} />
+    </line>
+  );
+}
+
 // ── Contour simplifié de Madagascar ──────────────────────────────────────────
 const MADAGASCAR_COASTLINE: [number, number][] = [
   [-12.04, 49.25], [-12.38, 49.56], [-12.85, 49.80], [-13.40, 50.08],
@@ -322,7 +376,12 @@ function Globe() {
         );
       })}
 
-      {/* Contour de Madagascar */}
+      {/* Contours des continents */}
+      <ContinentOutline coords={AFRICA_COASTLINE} radius={RADIUS} color="#1a5080" opacity={0.55} />
+      <ContinentOutline coords={ARABIAN_PENINSULA} radius={RADIUS} color="#1a5080" opacity={0.4} />
+      <ContinentOutline coords={INDIAN_SUBCONTINENT} radius={RADIUS} color="#1a5080" opacity={0.4} />
+
+      {/* Contour de Madagascar — mis en valeur */}
       <MadagascarOutline radius={RADIUS} />
 
       {/* Pings GPS des villes */}
