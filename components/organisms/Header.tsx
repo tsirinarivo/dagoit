@@ -243,7 +243,6 @@ export function Header() {
             <Button
               variant="primary"
               size="sm"
-              magnetic
               className="hidden md:flex"
               asChild
             >
