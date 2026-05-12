@@ -154,7 +154,7 @@ export default function TrackingPlatformPage() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <Button variant="primary" size="lg" magnetic rightIcon={<ArrowRight className="h-4 w-4" />} asChild>
+              <Button variant="primary" size="lg" rightIcon={<ArrowRight className="h-4 w-4" />} asChild>
                 <Link href="/devis">Demander une démo</Link>
               </Button>
               <Button variant="secondary" size="lg" asChild>
@@ -262,7 +262,7 @@ export default function TrackingPlatformPage() {
           <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
             Demandez une démo personnalisée avec vos propres véhicules de test. Un technicien vous présente toutes les fonctionnalités et répond à vos questions.
           </p>
-          <Button variant="primary" size="xl" magnetic rightIcon={<ArrowRight className="h-5 w-5" />} asChild>
+          <Button variant="primary" size="xl" rightIcon={<ArrowRight className="h-5 w-5" />} asChild>
             <Link href="/devis">Demander une démo gratuite</Link>
           </Button>
         </div>

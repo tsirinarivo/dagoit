@@ -246,7 +246,7 @@ export default function RessourcesPage() {
           <p className="text-[var(--text-secondary)] mb-8">
             Notre équipe répond à toutes vos questions par téléphone, WhatsApp ou email, en français et en malgache.
           </p>
-          <Button variant="primary" size="lg" magnetic rightIcon={<ArrowRight className="h-4 w-4" />} asChild>
+          <Button variant="primary" size="lg" rightIcon={<ArrowRight className="h-4 w-4" />} asChild>
             <Link href="/contact">Contacter l'équipe</Link>
           </Button>
         </div>

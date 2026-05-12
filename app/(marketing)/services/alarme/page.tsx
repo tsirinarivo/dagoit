@@ -217,7 +217,7 @@ export default function AlarmePage() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <Button variant="primary" size="lg" magnetic rightIcon={<ArrowRight className="h-4 w-4" />} asChild>
+              <Button variant="primary" size="lg" rightIcon={<ArrowRight className="h-4 w-4" />} asChild>
                 <Link href="/devis">Audit sécurité gratuit</Link>
               </Button>
               <Button variant="secondary" size="lg" asChild>

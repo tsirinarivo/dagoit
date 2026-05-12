@@ -224,7 +224,7 @@ export default function GeolocalisationPage() {
               <Button
                 variant="primary"
                 size="lg"
-                magnetic
+               
                 rightIcon={<ArrowRight className="h-4 w-4" />}
                 asChild
               >
