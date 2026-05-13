@@ -8,10 +8,10 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const metadata: Metadata = {
   title: "Nos Réalisations — DAGO IT Madagascar",
   description:
-    "Découvrez les projets réalisés par DAGO IT : flottes GPS, sites web, systèmes d'alarme pour des entreprises malgaches. Études de cas et résultats concrets.",
+    "Découvrez les projets réalisés par DAGO IT : flottes GPS, sites web, systèmes d'alarme à Madagascar. Études de cas et résultats concrets.",
   openGraph: {
     title: "Réalisations DAGO IT — Projets Tech Madagascar",
-    description: "GPS, hébergement, alarmes : nos projets pour les entreprises malgaches.",
+    description: "GPS, hébergement, alarmes : nos projets à Madagascar.",
   },
 };
 
@@ -124,7 +124,7 @@ export default function RealisationsPage() {
             <span className="gradient-text-cyan">à Madagascar</span>
           </h1>
           <p className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-xl mx-auto">
-            Des projets concrets pour des entreprises malgaches. Chiffres réels, résultats mesurables.
+            Des projets concrets à Madagascar. Chiffres réels, résultats mesurables.
           </p>
         </div>
       </section>
@@ -176,7 +176,7 @@ export default function RealisationsPage() {
                     <span className="text-xs font-mono text-[var(--text-tertiary)]">{project.tag}</span>
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-[var(--text-primary)]">Secteur {project.sector}</h3>
+                    <h3 className="font-display font-bold text-[var(--text-primary)]">{project.sector}</h3>
                   </div>
                   <div>
                     <p className="text-xs font-mono uppercase tracking-wider text-[var(--text-tertiary)] mb-1">Défi</p>
