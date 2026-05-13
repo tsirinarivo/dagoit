@@ -191,7 +191,7 @@ export function TestimonialsSection() {
                       {testimonial.name}
                     </p>
                     <p className="text-xs text-[var(--text-tertiary)]">
-                      {testimonial.role} · {testimonial.company}
+                      {testimonial.role} · {testimonial.sector}
                     </p>
                   </div>
                   <span className="ml-auto text-xs px-2 py-1 rounded-lg bg-[var(--surface)] text-[var(--text-tertiary)] border border-[var(--border)] hidden sm:block">
