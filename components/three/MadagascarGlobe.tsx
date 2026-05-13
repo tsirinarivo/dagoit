@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useEffect } from "react";
+import { useRef, useMemo, useEffect, Suspense } from "react";
 import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
@@ -189,7 +189,7 @@ const MADAGASCAR_COASTLINE: [number, number][] = [
 function MadagascarOutline({ radius }: { radius: number }) {
   const geometry = useMemo(() => {
     const pts = MADAGASCAR_COASTLINE.map(([lat, lng]) =>
-      latLngToVec3(lat, lng, radius + 0.005)
+      latLngToVec3(lat, lng, radius + 0.03)
     );
     return new THREE.BufferGeometry().setFromPoints(pts);
   }, [radius]);
@@ -233,32 +233,6 @@ function Globe() {
     return map;
   }, []);
 
-  // Grille de méridiens/parallèles
-  const gridLines = useMemo(() => {
-    const lines: THREE.BufferGeometry[] = [];
-
-    // Méridiens (lignes verticales)
-    for (let lng = -180; lng <= 180; lng += 30) {
-      const pts: THREE.Vector3[] = [];
-      for (let lat = -90; lat <= 90; lat += 5) {
-        pts.push(latLngToVec3(lat, lng, RADIUS));
-      }
-      lines.push(new THREE.BufferGeometry().setFromPoints(pts));
-    }
-
-    // Parallèles (lignes horizontales)
-    for (let lat = -60; lat <= 60; lat += 30) {
-      const pts: THREE.Vector3[] = [];
-      for (let lng = -180; lng <= 180; lng += 5) {
-        pts.push(latLngToVec3(lat, lng, RADIUS));
-      }
-      // Fermer la boucle
-      pts.push(pts[0]);
-      lines.push(new THREE.BufferGeometry().setFromPoints(pts));
-    }
-
-    return lines;
-  }, []);
 
   return (
     <group ref={groupRef}>
@@ -267,33 +241,21 @@ function Globe() {
         <sphereGeometry args={[RADIUS, 64, 64]} />
         <meshStandardMaterial
           map={earthTexture}
-          roughness={0.8}
-          metalness={0.1}
+          roughness={0.7}
+          metalness={0.0}
         />
       </mesh>
 
       {/* Halo atmosphérique */}
       <mesh>
-        <sphereGeometry args={[RADIUS * 1.02, 32, 32]} />
+        <sphereGeometry args={[RADIUS * 1.03, 32, 32]} />
         <meshBasicMaterial
           color="#00E5FF"
           transparent
-          opacity={0.025}
+          opacity={0.04}
           side={THREE.BackSide}
         />
       </mesh>
-
-      {/* Grille de coordonnées */}
-      {gridLines.map((geo, i) => (
-        <line key={i}>
-          <primitive object={geo} attach="geometry" />
-          <lineBasicMaterial
-            color="#1a4080"
-            transparent
-            opacity={0.25}
-          />
-        </line>
-      ))}
 
       {/* Routes GPS avec animation */}
       {GPS_ROUTES.map((route, i) => {
@@ -349,11 +311,11 @@ function Scene() {
 
   return (
     <>
-      {/* Éclairage */}
-      <ambientLight intensity={0.4} color="#1a3a6f" />
-      <pointLight position={[5, 5, 5]} intensity={1.2} color="#00E5FF" />
-      <pointLight position={[-5, -3, -3]} intensity={0.5} color="#0b3a6f" />
-      <pointLight position={[0, -4, 2]} intensity={0.3} color="#A3FF12" />
+      {/* Éclairage renforcé pour la texture */}
+      <ambientLight intensity={1.2} color="#ffffff" />
+      <directionalLight position={[5, 3, 5]} intensity={1.5} color="#ffffff" />
+      <pointLight position={[-5, -3, -3]} intensity={0.4} color="#0b3a6f" />
+      <pointLight position={[0, -4, 2]} intensity={0.2} color="#A3FF12" />
 
       {/* Étoiles d'arrière-plan */}
       <Stars
@@ -366,7 +328,9 @@ function Scene() {
         speed={0.5}
       />
 
-      <Globe />
+      <Suspense fallback={null}>
+        <Globe />
+      </Suspense>
 
       <OrbitControls
         enableZoom={false}
