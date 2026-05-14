@@ -61,7 +61,7 @@ export const CONTACT_INFO = {
   phone: "+261 32 05 767 77",
   whatsapp: "+261320576777",
   email: "contact@dago-it.com",
-  address: "Lot IVT 53, Andraharo, Antananarivo 101, Madagascar",
+  address: "Villa Irintsara, Andranomadio, Toamasina 501, Madagascar",
   trackingUrl: "https://app.fleet.mg",
   hostingUrl: "https://dago-cloud.com",
 };
