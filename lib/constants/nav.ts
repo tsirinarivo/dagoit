@@ -30,6 +30,16 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
+    label: "Applications",
+    href: "/applications",
+    children: [
+      { label: "GrossistePPN", href: "/applications/grossiste-ppn", badge: "ERP" },
+      { label: "TransHub", href: "/applications/transhub" },
+      { label: "RestaurantOS", href: "/applications/restaurant-os" },
+      { label: "SMS Gate", href: "/applications/sms-gate" },
+    ],
+  },
+  {
     label: "Boutique",
     href: "/boutique",
   },
