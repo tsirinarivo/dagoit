@@ -58,8 +58,8 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const CONTACT_INFO = {
-  phone: "+261 34 00 000 00",
-  whatsapp: "+261340000000",
+  phone: "+261 32 05 767 77",
+  whatsapp: "+261320576777",
   email: "contact@dago-it.com",
   address: "Lot IVT 53, Andraharo, Antananarivo 101, Madagascar",
   trackingUrl: "https://app.fleet.mg",
