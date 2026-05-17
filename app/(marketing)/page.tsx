@@ -66,7 +66,7 @@ export default function HomePage() {
             paymentAccepted: "Mvola, Orange Money, Airtel Money, Carte bancaire, Virement",
             areaServed: "Madagascar",
             sameAs: [
-              "https://facebook.com/dagoit",
+              "https://www.facebook.com/dagoit1/",
               "https://linkedin.com/company/dagoit",
             ],
           }),
