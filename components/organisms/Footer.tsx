@@ -292,8 +292,8 @@ export function Footer() {
         {/* Copyright */}
         <div className="border-t border-[var(--border)] py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--text-tertiary)]">
           <p>
-            &copy; {new Date().getFullYear()} DAGO IT — Tous droits réservés.
-            Antananarivo, Madagascar.
+            &copy; 2025 DAGO IT — Tous droits réservés.
+            Toamasina, Madagascar.
           </p>
           <p className="font-mono">
             <Badge variant="online" dot pulse>

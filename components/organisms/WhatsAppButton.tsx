@@ -9,17 +9,20 @@ import { whatsappLink } from "@/lib/utils/formatPhone";
 export function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [showPulse, setShowPulse] = useState(false);
+  const [online, setOnline] = useState(false);
 
   function isBusinessHours() {
     const now = new Date();
-    const day = now.getDay(); // 0=dim, 6=sam
+    const day = now.getDay();
     const hour = now.getHours();
     if (day === 0) return false;
     if (day === 6) return hour >= 8 && hour < 12;
     return hour >= 8 && hour < 17;
   }
 
-  const online = isBusinessHours();
+  useEffect(() => {
+    setOnline(isBusinessHours());
+  }, []);
 
   // Afficher le pulse après 5 secondes
   useEffect(() => {

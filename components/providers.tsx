@@ -8,6 +8,8 @@ function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -20,15 +22,15 @@ function LenisProvider({ children }: { children: React.ReactNode }) {
 
     lenisRef.current = lenis;
 
+    let animId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      animId = requestAnimationFrame(raf);
     }
-
-    const rafId = requestAnimationFrame(raf);
+    animId = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(animId);
       lenis.destroy();
     };
   }, []);

@@ -45,8 +45,9 @@ const BADGE_MAP = {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  if (!product) notFound();
+  const productData = getProductBySlug(slug);
+  if (!productData) notFound();
+  const product = productData;
 
   const stockInfo = STOCK_MAP[product.stock];
 
