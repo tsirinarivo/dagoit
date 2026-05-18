@@ -74,7 +74,7 @@ const ICON_COLOR: Record<string, string> = {
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       {/* Hero */}
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
@@ -166,6 +166,6 @@ export default function ServicesPage() {
       </section>
 
       <FinalCTA />
-    </main>
+    </div>
   );
 }

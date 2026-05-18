@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ConfidentialitePage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       <div className="container-dago max-w-3xl">
         <h1 className="font-display font-black text-3xl text-[var(--text-primary)] mb-2">
           Politique de Confidentialité
@@ -85,6 +85,6 @@ export default function ConfidentialitePage() {
           </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -84,7 +84,7 @@ const TIMELINE = [
 
 export default function AProposPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       {/* Hero */}
       <section className="container-dago mb-20">
         <div className="max-w-3xl">
@@ -199,6 +199,6 @@ export default function AProposPage() {
       </section>
 
       <FinalCTA />
-    </main>
+    </div>
   );
 }

@@ -353,7 +353,6 @@ export function MadagascarGlobe({ className }: { className?: string }) {
       className={className}
       aria-hidden="true"
       role="presentation"
-      aria-label="Globe 3D de Madagascar avec points GPS animés"
     >
       <Canvas
         dpr={[1, 1.5]}

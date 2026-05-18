@@ -33,26 +33,26 @@ export default function HomePage() {
             description:
               "Solutions de géolocalisation GPS professionnelle, hébergement web et systèmes d'alarme à Madagascar.",
             url: "https://dago-it.com",
-            telephone: "+261340000000",
+            telephone: "+261320576777",
             email: "contact@dago-it.com",
             address: {
               "@type": "PostalAddress",
-              streetAddress: "Lot IVT 53, Andraharo",
-              addressLocality: "Antananarivo",
-              postalCode: "101",
+              streetAddress: "Villa Irintsara, Andranomadio",
+              addressLocality: "Toamasina",
+              postalCode: "501",
               addressCountry: "MG",
             },
             geo: {
               "@type": "GeoCoordinates",
-              latitude: -18.9249,
-              longitude: 47.5185,
+              latitude: -18.1443,
+              longitude: 49.3915,
             },
             openingHoursSpecification: [
               {
                 "@type": "OpeningHoursSpecification",
                 dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
                 opens: "08:00",
-                closes: "18:00",
+                closes: "17:00",
               },
               {
                 "@type": "OpeningHoursSpecification",

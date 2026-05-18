@@ -10,6 +10,17 @@ export function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [showPulse, setShowPulse] = useState(false);
 
+  function isBusinessHours() {
+    const now = new Date();
+    const day = now.getDay(); // 0=dim, 6=sam
+    const hour = now.getHours();
+    if (day === 0) return false;
+    if (day === 6) return hour >= 8 && hour < 12;
+    return hour >= 8 && hour < 17;
+  }
+
+  const online = isBusinessHours();
+
   // Afficher le pulse après 5 secondes
   useEffect(() => {
     const timer = setTimeout(() => setShowPulse(true), 5000);
@@ -47,8 +58,8 @@ export function WhatsAppButton() {
                   DAGO IT Support
                 </p>
                 <p className="text-xs text-[var(--text-tertiary)] flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-lime-500 animate-blink" />
-                  En ligne maintenant
+                  <span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-lime-500 animate-blink" : "bg-slate-500"}`} />
+                  {online ? "En ligne maintenant" : "Répond sous 24h"}
                 </p>
               </div>
               <button

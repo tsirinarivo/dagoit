@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ComptePage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-24">
+    <div className="min-h-screen flex items-center justify-center px-4 py-24">
       <div className="w-full max-w-md text-center">
         <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-6">
           <Monitor className="h-8 w-8 text-cyan-400" />
@@ -64,6 +64,6 @@ export default function ComptePage() {
           </a>
         </p>
       </div>
-    </main>
+    </div>
   );
 }

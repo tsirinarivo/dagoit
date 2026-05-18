@@ -1,28 +1,18 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock, CheckCircle } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
-import { Input, Textarea } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { CONTACT_INFO } from "@/lib/constants/nav";
+import { DevisForm } from "./DevisForm";
 
 export const metadata: Metadata = {
   title: "Demander un Devis — DAGO IT Madagascar",
   description:
-    "Obtenez un devis gratuit pour votre projet GPS, hébergement web ou système d'alarme. Réponse sous 24h. DAGO IT, Antananarivo Madagascar.",
+    "Obtenez un devis gratuit pour votre projet GPS, hébergement web ou système d'alarme. Réponse sous 24h. DAGO IT, Toamasina Madagascar.",
   openGraph: {
     title: "Devis Gratuit — DAGO IT Madagascar",
     description: "Décrivez votre projet, nous vous répondons sous 24h.",
   },
 };
-
-const SERVICES = [
-  "Géolocalisation GPS / Flotte",
-  "Hébergement Web",
-  "Système d'Alarme",
-  "Plateforme Tracking",
-  "Traceur GPS (achat)",
-  "Autre / Combinaison",
-];
 
 const GUARANTEES = [
   "Réponse sous 24h ouvrées",
@@ -33,7 +23,7 @@ const GUARANTEES = [
 
 export default function DevisPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       {/* Hero */}
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
@@ -53,87 +43,7 @@ export default function DevisPage() {
 
       <section className="container-dago">
         <div className="grid lg:grid-cols-[1fr_380px] gap-12">
-          {/* Formulaire */}
-          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8">
-            <h2 className="font-display font-bold text-xl mb-6 text-[var(--text-primary)]">
-              Votre projet
-            </h2>
-
-            <form className="space-y-5" action="#" method="POST">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Input label="Prénom" name="prenom" placeholder="Jean" required />
-                <Input label="Nom" name="nom" placeholder="Rakoto" required />
-              </div>
-
-              <Input
-                label="Email professionnel"
-                name="email"
-                type="email"
-                placeholder="jean@monentreprise.mg"
-                required
-              />
-
-              <Input
-                label="Téléphone / WhatsApp"
-                name="telephone"
-                type="tel"
-                placeholder="+261 34 00 000 00"
-              />
-
-              <Input
-                label="Entreprise"
-                name="entreprise"
-                placeholder="Nom de votre société"
-              />
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-[var(--text-secondary)]">
-                  Service concerné <span aria-hidden className="text-orange-400 ml-1">*</span>
-                </label>
-                <select
-                  name="service"
-                  required
-                  className="w-full h-11 rounded-xl px-4 text-sm bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
-                >
-                  <option value="">Sélectionner un service…</option>
-                  {SERVICES.map((s) => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-medium text-[var(--text-secondary)]">
-                  Nombre de véhicules / utilisateurs
-                </label>
-                <select
-                  name="volume"
-                  className="w-full h-11 rounded-xl px-4 text-sm bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
-                >
-                  <option value="">Non applicable</option>
-                  <option value="1-5">1 à 5</option>
-                  <option value="6-20">6 à 20</option>
-                  <option value="21-50">21 à 50</option>
-                  <option value="51+">Plus de 50</option>
-                </select>
-              </div>
-
-              <Textarea
-                label="Décrivez votre besoin"
-                name="message"
-                placeholder="Ex : Je gère une flotte de 12 ambulances à Antananarivo. Je cherche une solution GPS avec alertes temps réel et rapport mensuel…"
-                required
-              />
-
-              <Button variant="primary" size="lg" type="submit" className="w-full">
-                Envoyer ma demande
-              </Button>
-
-              <p className="text-xs text-[var(--text-tertiary)] text-center">
-                En soumettant ce formulaire, vous acceptez d'être contacté par DAGO IT concernant votre projet.
-              </p>
-            </form>
-          </div>
+          <DevisForm />
 
           {/* Sidebar */}
           <aside className="space-y-6">
@@ -206,6 +116,6 @@ export default function DevisPage() {
           </aside>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

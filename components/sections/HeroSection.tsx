@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/atoms/Badge";
 import { fadeUp, staggerContainer } from "@/lib/animations/variants";
@@ -32,7 +32,7 @@ const STATS = [
 export function HeroSection() {
   return (
     <section
-      id="main-content"
+      id="hero"
       className="relative min-h-screen flex items-center overflow-hidden"
       aria-label="Section principale — DAGO IT"
     >

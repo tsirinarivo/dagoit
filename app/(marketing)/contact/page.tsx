@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
-import { Input, Textarea } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { CONTACT_INFO } from "@/lib/constants/nav";
+import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact — DAGO IT Madagascar",
   description:
-    "Contactez DAGO IT : support technique, questions commerciales, partenariats. Basés à Antananarivo, nous répondons sous 24h.",
+    "Contactez DAGO IT : support technique, questions commerciales, partenariats. Basés à Toamasina, nous répondons sous 24h.",
   openGraph: {
-    title: "Contactez DAGO IT — Antananarivo, Madagascar",
+    title: "Contactez DAGO IT — Toamasina, Madagascar",
     description: "Support, questions, partenariats. Réponse sous 24h.",
   },
 };
@@ -33,8 +32,8 @@ const CONTACT_CARDS = [
   {
     icon: MapPin,
     title: "Adresse",
-    value: "Andraharo, Antananarivo 101",
-    href: "https://maps.google.com/?q=Andraharo+Antananarivo",
+    value: CONTACT_INFO.address,
+    href: "https://maps.google.com/?q=Andranomadio+Toamasina+Madagascar",
     detail: "Visite sur rendez-vous",
   },
   {
@@ -47,7 +46,7 @@ const CONTACT_CARDS = [
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       {/* Hero */}
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
@@ -104,50 +103,12 @@ export default function ContactPage() {
       {/* Formulaire + WhatsApp */}
       <section className="container-dago">
         <div className="grid lg:grid-cols-[1fr_360px] gap-12">
-          {/* Formulaire */}
-          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8">
-            <h2 className="font-display font-bold text-xl mb-6 text-[var(--text-primary)]">
-              Envoyer un message
-            </h2>
-
-            <form className="space-y-5" action="#" method="POST">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Input label="Prénom" name="prenom" placeholder="Jean" required />
-                <Input label="Nom" name="nom" placeholder="Rakoto" required />
-              </div>
-
-              <Input
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="jean@exemple.mg"
-                required
-              />
-
-              <Input
-                label="Sujet"
-                name="sujet"
-                placeholder="Ex : Question sur la plateforme GPS"
-                required
-              />
-
-              <Textarea
-                label="Message"
-                name="message"
-                placeholder="Décrivez votre demande…"
-                required
-              />
-
-              <Button variant="primary" size="lg" type="submit" className="w-full">
-                Envoyer le message
-              </Button>
-            </form>
-          </div>
+          <ContactForm />
 
           {/* Sidebar */}
           <aside className="space-y-6">
             {/* WhatsApp */}
-            <div className="bg-green-900/20 border border-green-600/30 rounded-2xl p-6">
+            <div className="bg-[var(--surface)] border border-green-600/30 rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
                 <MessageCircle className="h-5 w-5 text-green-400" />
                 <h3 className="font-semibold text-[var(--text-primary)]">
@@ -192,6 +153,6 @@ export default function ContactPage() {
           </aside>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

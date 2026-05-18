@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function CGVPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       <div className="container-dago max-w-3xl">
         <h1 className="font-display font-black text-3xl text-[var(--text-primary)] mb-2">
           Conditions Générales de Vente
@@ -85,6 +85,6 @@ export default function CGVPage() {
           </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

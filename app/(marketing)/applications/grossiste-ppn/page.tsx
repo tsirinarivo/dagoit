@@ -49,7 +49,7 @@ const PLANS = [
 export default function GrossistePPNPage() {
   return (
     <>
-      <main className="min-h-screen pt-24 pb-20">
+      <div className="min-h-screen pt-24 pb-20">
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 70% at 30% 50%, rgba(0,229,255,0.12) 0%, transparent 60%), linear-gradient(to bottom, #060e1c, #0a1628)" }} />
@@ -139,7 +139,7 @@ export default function GrossistePPNPage() {
         </section>
 
         <FinalCTA />
-      </main>
+      </div>
     </>
   );
 }

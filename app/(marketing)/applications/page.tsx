@@ -69,7 +69,7 @@ const COLOR_CLASSES: Record<string, { icon: string; dot: string; border: string 
 
 export default function ApplicationsPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
           <Badge variant="default" className="mb-6">4 applications métier</Badge>
@@ -129,6 +129,6 @@ export default function ApplicationsPage() {
       </section>
 
       <FinalCTA />
-    </main>
+    </div>
   );
 }

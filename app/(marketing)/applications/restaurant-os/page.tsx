@@ -48,7 +48,7 @@ const PLANS = [
 
 export default function RestaurantOSPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 70% at 30% 50%, rgba(255,107,53,0.1) 0%, transparent 60%), linear-gradient(to bottom, #060e1c, #0a1628)" }} />
@@ -164,6 +164,6 @@ export default function RestaurantOSPage() {
       </section>
 
       <FinalCTA />
-    </main>
+    </div>
   );
 }

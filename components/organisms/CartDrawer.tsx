@@ -51,7 +51,7 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md flex flex-col bg-primary-800 border-l border-[var(--border)] shadow-2xl"
+            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md flex flex-col bg-[var(--bg-secondary)] border-l border-[var(--border)] shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]">
@@ -102,7 +102,7 @@ export function CartDrawer() {
                       className="flex gap-4 p-3 rounded-xl bg-[var(--surface)] border border-[var(--border)]"
                     >
                       {/* Image placeholder */}
-                      <div className="h-16 w-16 rounded-lg bg-primary-700 flex items-center justify-center shrink-0 overflow-hidden">
+                      <div className="h-16 w-16 rounded-lg bg-[var(--bg-tertiary)] flex items-center justify-center shrink-0 overflow-hidden">
                         <svg viewBox="0 0 64 64" className="h-10 w-10 opacity-30" fill="none">
                           <rect x="8" y="16" width="48" height="32" rx="4" stroke="currentColor" strokeWidth="2" />
                           <circle cx="32" cy="32" r="6" stroke="currentColor" strokeWidth="2" />
@@ -132,9 +132,10 @@ export function CartDrawer() {
                         </button>
                         <div className="flex items-center gap-1.5">
                           <button
-                            onClick={() => updateQuantity(product.id, quantity - 1)}
+                            onClick={() => quantity > 1 && updateQuantity(product.id, quantity - 1)}
                             aria-label="Diminuer la quantité"
-                            className="h-6 w-6 rounded-md bg-[var(--bg-tertiary)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                            disabled={quantity <= 1}
+                            className="h-6 w-6 rounded-md bg-[var(--bg-tertiary)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <Minus className="h-3 w-3" />
                           </button>
