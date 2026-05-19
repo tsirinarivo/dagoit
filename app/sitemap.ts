@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/services/tracking-platform`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/applications`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/applications/grossiste-ppn`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/applications/transhub`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/applications/restaurant-os`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/applications/sms-gate`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/boutique`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
