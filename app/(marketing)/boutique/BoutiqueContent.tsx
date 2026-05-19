@@ -3,13 +3,13 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Search, Filter, ShoppingCart, Eye, Heart, Star } from "lucide-react";
+import { Search, ShoppingCart, Eye, Heart } from "lucide-react";
 import { PRODUCTS, type ProductCategory } from "@/lib/constants/products";
 import { useCartStore } from "@/lib/stores/cartStore";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { staggerGrid, fadeUp } from "@/lib/animations/variants";
 
 const CATEGORIES: Array<{ id: ProductCategory | "all"; label: string; emoji: string }> = [

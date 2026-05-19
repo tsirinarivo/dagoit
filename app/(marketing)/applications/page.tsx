@@ -60,7 +60,7 @@ export default function ApplicationsPage() {
     <div className="min-h-screen pt-24 pb-20">
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
-          <Badge variant="default" className="mb-6">3 applications métier</Badge>
+          <Badge variant="neutral" className="mb-6">3 applications métier</Badge>
           <h1 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-4">
             Applications conçues pour{" "}
             <span className="gradient-text-cyan">Madagascar</span>

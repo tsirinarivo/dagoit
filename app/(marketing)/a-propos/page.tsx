@@ -88,7 +88,7 @@ export default function AProposPage() {
       {/* Hero */}
       <section className="container-dago mb-20">
         <div className="max-w-3xl">
-          <Badge variant="default" className="mb-6">
+          <Badge variant="neutral" className="mb-6">
             Fondée en 2016 · Antananarivo
           </Badge>
           <h1 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-6">

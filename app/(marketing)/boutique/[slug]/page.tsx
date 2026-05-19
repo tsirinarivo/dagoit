@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ShoppingCart, Check, Star, Package, Truck, Shield, Wrench } from "lucide-react";
+import { ArrowLeft, Check, Package, Truck, Shield, Wrench } from "lucide-react";
 import { PRODUCTS, getProductBySlug } from "@/lib/constants/products";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Badge } from "@/components/atoms/Badge";

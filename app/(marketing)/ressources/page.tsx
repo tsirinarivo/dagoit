@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, FileText, Video, HelpCircle } from "lucide-react";
+import { ArrowRight, BookOpen, FileText, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/atoms/Badge";
 import { FinalCTA } from "@/components/sections/FinalCTA";
