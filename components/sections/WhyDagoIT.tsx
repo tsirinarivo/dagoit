@@ -141,7 +141,7 @@ export function WhyDagoIT() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto"
           role="list"
         >
-          {FEATURES.map((feature, i) => {
+          {FEATURES.map((feature) => {
             const colors = ACCENT_COLORS[feature.accent];
             const isLarge = feature.size === "large";
 

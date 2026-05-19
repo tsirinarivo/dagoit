@@ -78,7 +78,7 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
-          <Badge variant="default" className="mb-6">
+          <Badge variant="neutral" className="mb-6">
             4 domaines d'expertise
           </Badge>
           <h1 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-4">

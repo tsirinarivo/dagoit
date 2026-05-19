@@ -6,7 +6,6 @@ import { Check, X, ArrowRight, Sparkles } from "lucide-react";
 import { GPS_PLANS } from "@/lib/constants/plans";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/atoms/Badge";
 import { useUIStore } from "@/lib/stores/uiStore";
 import { fadeUp, staggerGrid, defaultViewport } from "@/lib/animations/variants";
 import { cn } from "@/lib/utils/cn";
