@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Wifi, Globe, Utensils, MessageSquare } from "lucide-react";
+import { ArrowRight, Globe, Utensils, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export const metadata: Metadata = {
   title: "Applications — DAGO IT Madagascar",
   description:
-    "Applications métier développées par DAGO IT : ERP grossiste, plateforme transport, gestion restaurant, passerelle SMS. Solutions conçues pour Madagascar.",
+    "Applications métier développées par DAGO IT : ERP grossiste, gestion restaurant, passerelle SMS. Solutions conçues pour Madagascar.",
 };
 
 const APPS = [
@@ -22,18 +22,6 @@ const APPS = [
       "Application de gestion complète pour grossistes alimentaires à Madagascar. Optimisée pour connexions lentes, utilisable partiellement hors ligne.",
     features: ["Stocks & inventaire", "Commandes & facturation", "Clients & fournisseurs", "Rapports & analytique"],
     color: "cyan",
-  },
-  {
-    icon: Wifi,
-    name: "TransHub",
-    tagline: "Plateforme transport multi-coopératives",
-    href: "/applications/transhub",
-    badge: "transhub.mg",
-    badgeVariant: "lime" as const,
-    description:
-      "Réservation de billets et envoi de colis pour Madagascar. Une seule app pour les voyageurs et les coopératives de transport.",
-    features: ["Recherche & réservation", "Choix de siège", "Suivi colis", "Gestion coopérative"],
-    color: "lime",
   },
   {
     icon: Utensils,
@@ -72,7 +60,7 @@ export default function ApplicationsPage() {
     <div className="min-h-screen pt-24 pb-20">
       <section className="container-dago mb-16">
         <div className="max-w-2xl">
-          <Badge variant="default" className="mb-6">4 applications métier</Badge>
+          <Badge variant="default" className="mb-6">3 applications métier</Badge>
           <h1 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-4">
             Applications conçues pour{" "}
             <span className="gradient-text-cyan">Madagascar</span>
