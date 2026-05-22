@@ -143,6 +143,44 @@ export const PRODUCTS: Product[] = [
     compatible: ["Telma", "Orange Madagascar", "Airtel"],
   },
   {
+    id: "starlink-mini",
+    slug: "routeur-satellite-starlink-mini",
+    name: "Kit Starlink Mini",
+    brand: "Starlink",
+    category: "routeurs-wifi",
+    price: 1650000,
+    stock: "in_stock",
+    badges: ["new", "bestseller"],
+    images: [
+      "/images/products/starlink-mini-1.jpg",
+      "/images/products/starlink-mini-2.jpg",
+      "/images/products/starlink-mini-3.jpg",
+    ],
+    shortDescription:
+      "Internet satellite haut débit partout à Madagascar. Antenne + routeur WiFi intégrés, ultra-portable.",
+    description: `Le Kit Starlink Mini apporte Internet haut débit par satellite dans les zones les plus reculées de Madagascar : brousse, sites miniers, plantations, hôtels en région, équipes terrain.
+
+    Antenne et routeur WiFi 5 sont intégrés dans un seul boîtier compact (loger dans un sac à dos). Alimentation 12-48V DC ou secteur, idéal pour véhicules, bateaux et installations solaires. Débits descendants typiquement de 50 à 150 Mbps, latence 25-60 ms.
+
+    Livré configuré avec abonnement Roam ou Fixe au choix. Installation par nos techniciens disponible (Antananarivo, Toamasina, Mahajanga).`,
+    specs: {
+      "Type": "Internet satellite LEO (Starlink)",
+      "Débit descendant": "50-150 Mbps typique",
+      "Débit montant": "10-25 Mbps typique",
+      "Latence": "25-60 ms",
+      "WiFi": "WiFi 5 (802.11ac) intégré, 2.4 + 5 GHz",
+      "Couverture WiFi": "Jusqu'à 112 m²",
+      "Connexions simultanées": "128 appareils",
+      "Alimentation": "12-48V DC ou 100-240V AC, 25-40W",
+      "Dimensions": "298 × 259 × 38.5 mm",
+      "Poids": "1.10 kg (antenne)",
+      "Étanchéité": "IP67",
+      "Température": "-30°C à +50°C",
+      "Contenu du kit": "Antenne Mini, câble 15m, alimentation, support",
+    },
+    compatible: ["Abonnement Roam", "Abonnement Fixe", "Solaire 12-48V"],
+  },
+  {
     id: "alarme-pro-kit",
     slug: "kit-alarme-professionnel",
     name: "Kit Alarme Professionnel Pro 8Z",
