@@ -98,6 +98,10 @@ export function toProduct(e: ErpProduct): Product {
 }
 
 export async function getCatalog(): Promise<Product[]> {
+  // Kill switch : ERP_CATALOG_ENABLED=false → on affiche uniquement les 5 produits curatés.
+  if (process.env.ERP_CATALOG_ENABLED !== "true") {
+    return PRODUCTS;
+  }
   try {
     const res = await fetch(`${baseUrl()}/api/v1/inventory`, {
       headers: { Authorization: `Bearer ${token()}` },
