@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Check, Package, Truck, Shield, Wrench } from "lucide-react";
-import { PRODUCTS, getProductBySlug } from "@/lib/constants/products";
+import { getCatalog, getProductBySlugFromCatalog } from "@/lib/erp";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Badge } from "@/components/atoms/Badge";
 import { AddToCartButton } from "./AddToCartButton";
@@ -11,13 +11,16 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export const revalidate = 120;
+
 export async function generateStaticParams() {
-  return PRODUCTS.map((p) => ({ slug: p.slug }));
+  const products = await getCatalog();
+  return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlugFromCatalog(slug);
   if (!product) return { title: "Produit introuvable" };
 
   return {
@@ -45,7 +48,8 @@ const BADGE_MAP = {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const productData = getProductBySlug(slug);
+  const products = await getCatalog();
+  const productData = products.find((p) => p.slug === slug);
   if (!productData) notFound();
   const product = productData;
 
@@ -296,7 +300,7 @@ export default async function ProductPage({ params }: Props) {
             Produits similaires
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {PRODUCTS.filter((p) => p.id !== product.id && p.category === product.category)
+            {products.filter((p) => p.id !== product.id && p.category === product.category)
               .slice(0, 3)
               .map((p) => (
                 <Link

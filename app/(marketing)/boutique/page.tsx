@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { BoutiqueContent } from "./BoutiqueContent";
+import { getCatalog } from "@/lib/erp";
+
+export const revalidate = 120;
 
 export const metadata: Metadata = {
   title: "Boutique GPS & Accessoires Tech — DAGO IT Madagascar",
@@ -15,7 +17,8 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function BoutiquePage() {
+export default async function BoutiquePage() {
+  const products = await getCatalog();
   return (
     <>
       <script
@@ -32,15 +35,7 @@ export default function BoutiquePage() {
           }),
         }}
       />
-      <Suspense
-        fallback={
-          <div className="min-h-screen flex items-center justify-center">
-            <div className="h-8 w-8 rounded-full border-2 border-cyan-500 border-t-transparent animate-spin" />
-          </div>
-        }
-      >
-        <BoutiqueContent />
-      </Suspense>
+      <BoutiqueContent products={products} />
     </>
   );
 }

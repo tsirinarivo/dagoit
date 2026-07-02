@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Search, ShoppingCart, Eye, Heart } from "lucide-react";
-import { PRODUCTS, type ProductCategory } from "@/lib/constants/products";
+import type { Product, ProductCategory } from "@/lib/constants/products";
 import { useCartStore } from "@/lib/stores/cartStore";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Badge } from "@/components/atoms/Badge";
@@ -33,7 +33,7 @@ const STOCK_MAP = {
   out_of_stock: { variant: "offline" as const, label: "Rupture" },
 };
 
-function ProductCard({ product }: { product: (typeof PRODUCTS)[0] }) {
+function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCartStore();
   const [wishlist, setWishlist] = useState(false);
   const stockInfo = STOCK_MAP[product.stock];
@@ -159,13 +159,13 @@ function ProductCard({ product }: { product: (typeof PRODUCTS)[0] }) {
   );
 }
 
-export function BoutiqueContent() {
+export function BoutiqueContent({ products }: { products: Product[] }) {
   const [activeCategory, setActiveCategory] = useState<ProductCategory | "all">("all");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"relevance" | "price-asc" | "price-desc">("relevance");
 
   const filtered = useMemo(() => {
-    let result = PRODUCTS;
+    let result = products;
     if (activeCategory !== "all") {
       result = result.filter((p) => p.category === activeCategory);
     }
@@ -184,7 +184,7 @@ export function BoutiqueContent() {
       result = [...result].sort((a, b) => b.price - a.price);
     }
     return result;
-  }, [activeCategory, search, sortBy]);
+  }, [activeCategory, search, sortBy, products]);
 
   return (
     <>
