@@ -125,7 +125,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "glass border-b border-[var(--border)] py-3"
+            ? "bg-primary-900/90 backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--border)] py-3"
             : "bg-transparent py-5"
         )}
         role="banner"

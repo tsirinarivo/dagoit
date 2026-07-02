@@ -233,7 +233,7 @@ export function BoutiqueContent() {
       </section>
 
       {/* ── FILTRES ── */}
-      <div className="sticky top-16 z-30 bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)] py-3">
+      <div className="sticky top-16 z-30 bg-primary-900/95 backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--border)] py-3">
         <div className="container-dago">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             {/* Catégories */}
