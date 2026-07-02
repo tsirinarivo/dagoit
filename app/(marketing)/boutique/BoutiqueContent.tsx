@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search, ShoppingCart, Eye, Heart } from "lucide-react";
 import type { Product, ProductCategory } from "@/lib/constants/products";
@@ -43,14 +44,24 @@ function ProductCard({ product }: { product: Product }) {
       variants={fadeUp}
       className="group relative flex flex-col rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/30 transition-all duration-300 overflow-hidden hover:shadow-card"
     >
-      {/* Image placeholder stylé */}
+      {/* Image produit (ou placeholder si absente) */}
       <div className="relative h-48 bg-gradient-to-br from-primary-800 to-primary-700 flex items-center justify-center overflow-hidden">
-        {/* Placeholder SVG */}
-        <svg viewBox="0 0 200 140" className="h-28 w-auto opacity-20" fill="none">
-          <rect x="20" y="20" width="160" height="100" rx="12" stroke="currentColor" strokeWidth="2" />
-          <circle cx="100" cy="70" r="25" stroke="currentColor" strokeWidth="2" />
-          <path d="M60 40 L100 15 L140 40" stroke="currentColor" strokeWidth="2" />
-        </svg>
+        {product.images[0] ? (
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-contain p-4"
+            unoptimized
+          />
+        ) : (
+          <svg viewBox="0 0 200 140" className="h-28 w-auto opacity-20" fill="none">
+            <rect x="20" y="20" width="160" height="100" rx="12" stroke="currentColor" strokeWidth="2" />
+            <circle cx="100" cy="70" r="25" stroke="currentColor" strokeWidth="2" />
+            <path d="M60 40 L100 15 L140 40" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        )}
 
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

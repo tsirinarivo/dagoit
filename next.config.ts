@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "dago-it.com" },
       { protocol: "https", hostname: "dago-cloud.com" },
+      { protocol: "https", hostname: "erp.dago-it.com" },
     ],
   },
   async headers() {

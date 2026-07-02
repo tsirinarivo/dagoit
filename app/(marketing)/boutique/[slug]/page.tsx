@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Check, Package, Truck, Shield, Wrench } from "lucide-react";
 import { getCatalog, getProductBySlugFromCatalog } from "@/lib/erp";
 import { formatPrice } from "@/lib/utils/formatPrice";
@@ -116,13 +117,24 @@ export default async function ProductPage({ params }: Props) {
               className="relative aspect-square rounded-2xl bg-gradient-to-br from-primary-700 to-primary-800 flex items-center justify-center overflow-hidden border border-[var(--border)]"
               aria-label={`Image principale de ${product.name}`}
             >
-              {/* Placeholder SVG stylé */}
-              <svg viewBox="0 0 300 300" className="h-48 w-auto opacity-20" fill="none" aria-hidden>
-                <rect x="40" y="60" width="220" height="180" rx="16" stroke="currentColor" strokeWidth="3" />
-                <circle cx="150" cy="150" r="50" stroke="currentColor" strokeWidth="3" />
-                <path d="M80 60 L150 20 L220 60" stroke="currentColor" strokeWidth="3" />
-                <circle cx="150" cy="150" r="10" fill="currentColor" opacity="0.5" />
-              </svg>
+              {product.images[0] ? (
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain p-6"
+                  priority
+                  unoptimized
+                />
+              ) : (
+                <svg viewBox="0 0 300 300" className="h-48 w-auto opacity-20" fill="none" aria-hidden>
+                  <rect x="40" y="60" width="220" height="180" rx="16" stroke="currentColor" strokeWidth="3" />
+                  <circle cx="150" cy="150" r="50" stroke="currentColor" strokeWidth="3" />
+                  <path d="M80 60 L150 20 L220 60" stroke="currentColor" strokeWidth="3" />
+                  <circle cx="150" cy="150" r="10" fill="currentColor" opacity="0.5" />
+                </svg>
+              )}
 
               {/* Badges */}
               <div className="absolute top-4 left-4 flex flex-col gap-2">
