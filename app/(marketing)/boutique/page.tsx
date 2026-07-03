@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { BoutiqueContent } from "./BoutiqueContent";
 import { getCatalog } from "@/lib/erp";
 
@@ -35,7 +36,15 @@ export default async function BoutiquePage() {
           }),
         }}
       />
-      <BoutiqueContent products={products} />
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="h-8 w-8 rounded-full border-2 border-cyan-500 border-t-transparent animate-spin" />
+          </div>
+        }
+      >
+        <BoutiqueContent products={products} />
+      </Suspense>
     </>
   );
 }

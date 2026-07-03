@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { Search, ShoppingCart, Eye, Heart } from "lucide-react";
+import { Search, ShoppingCart, Eye, Heart, ChevronDown, X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product, ProductCategory } from "@/lib/constants/products";
 import { CATEGORY_LABELS } from "@/lib/constants/products";
 import { useCartStore } from "@/lib/stores/cartStore";
@@ -14,6 +15,9 @@ import { Button } from "@/components/ui/button";
 
 import { staggerGrid, fadeUp } from "@/lib/animations/variants";
 
+const PAGE_SIZE = 24;
+const TOP_CATEGORIES = 6;
+
 function humanize(slug: string) {
   return slug
     .split("-")
@@ -21,8 +25,39 @@ function humanize(slug: string) {
     .join(" ");
 }
 
+/** Détection d'emoji par mot-clé sur le nom de catégorie (fallback : 🏷️). */
+function smartEmoji(slug: string): string {
+  const s = slug.toLowerCase();
+  const rules: Array<[RegExp, string]> = [
+    [/smartphone|telephone|phone|mobile/, "📱"],
+    [/audio|casque|ecouteur|son|enceinte|haut.?parleur/, "🎧"],
+    [/ordinateur|laptop|pc|informatique/, "💻"],
+    [/tablette|tablet|ipad/, "📱"],
+    [/montre|watch/, "⌚"],
+    [/cable|charg|adaptateur|prise/, "🔌"],
+    [/batterie|power.?bank|pile/, "🔋"],
+    [/televiseur|tv\b|ecran|monitor|display/, "📺"],
+    [/stockage|disque|ssd|hdd|usb|memoire|carte.?memoire/, "💾"],
+    [/appareil.?photo|camera|photo/, "📷"],
+    [/imprimante|print|encre|toner/, "🖨️"],
+    [/clavier|keyboard/, "⌨️"],
+    [/souris|mouse/, "🖱️"],
+    [/routeur|wifi|reseau|switch|network/, "📶"],
+    [/gps|traceur|balise/, "📡"],
+    [/alarme|securite|surveillance|camera.?ip/, "🔔"],
+    [/console|jeu|gaming/, "🎮"],
+    [/lampe|led|eclairage|lumiere/, "💡"],
+    [/protection|coque|housse|verre.?trempe/, "🛡️"],
+    [/accessoire/, "🔧"],
+    [/divers|autres?/, "📦"],
+  ];
+  for (const [re, emoji] of rules) if (re.test(s)) return emoji;
+  return "🏷️";
+}
+
 function categoryMeta(id: string): { label: string; emoji: string } {
-  return CATEGORY_LABELS[id] ?? { label: humanize(id), emoji: "🏷️" };
+  if (CATEGORY_LABELS[id]) return CATEGORY_LABELS[id];
+  return { label: humanize(id), emoji: smartEmoji(id) };
 }
 
 const BADGE_MAP = {
@@ -47,7 +82,6 @@ function ProductCard({ product }: { product: Product }) {
       variants={fadeUp}
       className="group relative flex flex-col rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/30 transition-all duration-300 overflow-hidden hover:shadow-card"
     >
-      {/* Image produit (ou placeholder si absente) */}
       <div className="relative h-48 bg-gradient-to-br from-primary-800 to-primary-700 flex items-center justify-center overflow-hidden">
         {product.images[0] ? (
           <Image
@@ -66,10 +100,8 @@ function ProductCard({ product }: { product: Product }) {
           </svg>
         )}
 
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5" role="list" aria-label="Étiquettes produit">
           {product.badges?.map((badge) => (
             <Badge key={badge} variant={BADGE_MAP[badge].variant} role="listitem">
@@ -78,7 +110,6 @@ function ProductCard({ product }: { product: Product }) {
           ))}
         </div>
 
-        {/* Actions hover */}
         <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-2 group-hover:translate-y-0">
           <Link
             href={`/boutique/${product.slug}`}
@@ -99,7 +130,6 @@ function ProductCard({ product }: { product: Product }) {
           </button>
         </div>
 
-        {/* Stock badge */}
         <div className="absolute bottom-3 right-3">
           <Badge variant={stockInfo.variant} dot>
             {stockInfo.label}
@@ -107,7 +137,6 @@ function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
 
-      {/* Infos produit */}
       <div className="flex flex-col flex-1 gap-3 p-4">
         <div>
           <p className="text-xs text-[var(--text-tertiary)] font-mono mb-0.5">
@@ -127,7 +156,6 @@ function ProductCard({ product }: { product: Product }) {
           {product.shortDescription}
         </p>
 
-        {/* Compatibilité */}
         {product.compatible && (
           <div className="flex flex-wrap gap-1">
             {product.compatible.slice(0, 2).map((op) => (
@@ -141,7 +169,6 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Prix + CTA */}
         <div className="flex items-end justify-between gap-3 pt-1">
           <div>
             {product.priceOld && (
@@ -173,13 +200,198 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-export function BoutiqueContent({ products }: { products: Product[] }) {
-  const [activeCategory, setActiveCategory] = useState<ProductCategory | "all">("all");
-  const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState<"relevance" | "price-asc" | "price-desc">("relevance");
+type CategoryEntry = { id: string; count: number; label: string; emoji: string };
 
-  // Catégories dérivées dynamiquement des produits (comptage inclus)
-  const categories = useMemo(() => {
+function CategoryDropdown({
+  categories,
+  active,
+  onPick,
+}: {
+  categories: CategoryEntry[];
+  active: string;
+  onPick: (id: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function onDoc(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const activeCat = categories.find((c) => c.id === active);
+  const isHidden = activeCat && active !== "all" && !categories.slice(0, TOP_CATEGORIES + 1).find((c) => c.id === active);
+
+  return (
+    <div ref={ref} className="relative shrink-0">
+      <button
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap ${
+          isHidden
+            ? "bg-cyan-500 text-primary-900"
+            : "bg-[var(--surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border)]"
+        }`}
+      >
+        {isHidden ? (
+          <>
+            <span>{activeCat!.emoji}</span>
+            {activeCat!.label}
+          </>
+        ) : (
+          <>Plus de catégories</>
+        )}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-full mt-2 w-[min(90vw,560px)] max-h-[60vh] overflow-y-auto rounded-2xl bg-primary-900/98 backdrop-blur-xl border border-[var(--border)] shadow-2xl p-3 z-40"
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                role="menuitem"
+                onClick={() => {
+                  onPick(cat.id);
+                  setOpen(false);
+                }}
+                aria-current={active === cat.id ? "true" : undefined}
+                className={`flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-left transition-colors ${
+                  active === cat.id
+                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30"
+                    : "text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]"
+                }`}
+              >
+                <span className="shrink-0">{cat.emoji}</span>
+                <span className="flex-1 truncate">{cat.label}</span>
+                <span className="text-[10px] opacity-60 font-mono shrink-0">{cat.count}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Pagination({
+  page,
+  totalPages,
+  onPick,
+}: {
+  page: number;
+  totalPages: number;
+  onPick: (p: number) => void;
+}) {
+  if (totalPages <= 1) return null;
+
+  // Fenêtre : 1 … p-1 p p+1 … totalPages
+  const pages: Array<number | "…"> = [];
+  const push = (n: number | "…") => pages.push(n);
+  push(1);
+  const from = Math.max(2, page - 1);
+  const to = Math.min(totalPages - 1, page + 1);
+  if (from > 2) push("…");
+  for (let i = from; i <= to; i++) push(i);
+  if (to < totalPages - 1) push("…");
+  if (totalPages > 1) push(totalPages);
+
+  return (
+    <nav aria-label="Pagination" className="flex items-center justify-center gap-1.5 mt-10">
+      <button
+        onClick={() => onPick(Math.max(1, page - 1))}
+        disabled={page === 1}
+        aria-label="Page précédente"
+        className="h-9 w-9 flex items-center justify-center rounded-lg bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+      {pages.map((p, i) =>
+        p === "…" ? (
+          <span key={`e-${i}`} className="px-2 text-[var(--text-tertiary)] text-sm">
+            …
+          </span>
+        ) : (
+          <button
+            key={p}
+            onClick={() => onPick(p)}
+            aria-current={p === page ? "page" : undefined}
+            className={`h-9 min-w-9 px-3 rounded-lg text-xs font-mono transition-colors ${
+              p === page
+                ? "bg-cyan-500 text-primary-900 font-bold"
+                : "bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            }`}
+          >
+            {p}
+          </button>
+        ),
+      )}
+      <button
+        onClick={() => onPick(Math.min(totalPages, page + 1))}
+        disabled={page === totalPages}
+        aria-label="Page suivante"
+        className="h-9 w-9 flex items-center justify-center rounded-lg bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </nav>
+  );
+}
+
+export function BoutiqueContent({ products }: { products: Product[] }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const activeCategory = (searchParams.get("cat") ?? "all") as ProductCategory | "all";
+  const search = searchParams.get("q") ?? "";
+  const sortBy = (searchParams.get("sort") ?? "relevance") as
+    | "relevance"
+    | "price-asc"
+    | "price-desc";
+  const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+
+  // Debounce local pour la recherche (évite un push URL à chaque frappe)
+  const [searchDraft, setSearchDraft] = useState(search);
+  useEffect(() => setSearchDraft(search), [search]);
+
+  const updateParams = useCallback(
+    (patch: Record<string, string | null>) => {
+      const next = new URLSearchParams(Array.from(searchParams.entries()));
+      for (const [k, v] of Object.entries(patch)) {
+        if (v == null || v === "" || v === "all" || (k === "page" && v === "1") || (k === "sort" && v === "relevance")) {
+          next.delete(k);
+        } else {
+          next.set(k, v);
+        }
+      }
+      const qs = next.toString();
+      router.replace(qs ? `?${qs}` : "?", { scroll: false });
+    },
+    [router, searchParams],
+  );
+
+  useEffect(() => {
+    if (searchDraft === search) return;
+    const t = setTimeout(() => updateParams({ q: searchDraft, page: "1" }), 250);
+    return () => clearTimeout(t);
+  }, [searchDraft, search, updateParams]);
+
+  const categories = useMemo<CategoryEntry[]>(() => {
     const counts = new Map<string, number>();
     for (const p of products) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
     const list = Array.from(counts.entries())
@@ -187,6 +399,9 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
       .sort((a, b) => b.count - a.count);
     return [{ id: "all", label: "Tous", emoji: "📦", count: products.length }, ...list];
   }, [products]);
+
+  const topCategories = categories.slice(0, TOP_CATEGORIES + 1);
+  const restCategories = categories.slice(TOP_CATEGORIES + 1);
 
   const filtered = useMemo(() => {
     let result = products;
@@ -199,7 +414,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
         (p) =>
           p.name.toLowerCase().includes(q) ||
           p.brand.toLowerCase().includes(q) ||
-          p.shortDescription.toLowerCase().includes(q)
+          p.shortDescription.toLowerCase().includes(q),
       );
     }
     if (sortBy === "price-asc") {
@@ -210,9 +425,18 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
     return result;
   }, [activeCategory, search, sortBy, products]);
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const clampedPage = Math.min(page, totalPages);
+  const pageItems = filtered.slice((clampedPage - 1) * PAGE_SIZE, clampedPage * PAGE_SIZE);
+
+  const gridTopRef = useRef<HTMLDivElement>(null);
+  function goToPage(p: number) {
+    updateParams({ page: String(p) });
+    gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <>
-      {/* ── HERO ── */}
       <section className="relative pt-24 pb-10 overflow-hidden">
         <div
           aria-hidden
@@ -237,7 +461,6 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
             Orange Money, Airtel Money. Livraison à Antananarivo et en régions.
           </p>
 
-          {/* Moyens de paiement */}
           <div
             className="flex flex-wrap items-center justify-center gap-2"
             aria-label="Moyens de paiement acceptés"
@@ -250,25 +473,23 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
                 >
                   {m}
                 </span>
-              )
+              ),
             )}
           </div>
         </div>
       </section>
 
-      {/* ── FILTRES ── */}
-      <div className="sticky top-16 z-30 bg-primary-900/95 backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--border)] py-3">
+      <div ref={gridTopRef} className="sticky top-16 z-30 bg-primary-900/95 backdrop-blur-xl backdrop-saturate-150 border-b border-[var(--border)] py-3">
         <div className="container-dago">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            {/* Catégories */}
             <nav
               aria-label="Filtrer par catégorie"
               className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide flex-1"
             >
-              {categories.map((cat) => (
+              {topCategories.map((cat) => (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
+                  onClick={() => updateParams({ cat: cat.id, page: "1" })}
                   aria-pressed={activeCategory === cat.id}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 whitespace-nowrap shrink-0 ${
                     activeCategory === cat.id
@@ -281,26 +502,40 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
                   <span className="ml-1 text-[10px] opacity-60 font-mono">{cat.count}</span>
                 </button>
               ))}
+              {restCategories.length > 0 && (
+                <CategoryDropdown
+                  categories={categories}
+                  active={activeCategory}
+                  onPick={(id) => updateParams({ cat: id, page: "1" })}
+                />
+              )}
             </nav>
 
             <div className="flex items-center gap-2 w-full sm:w-auto">
-              {/* Recherche */}
               <div className="relative flex-1 sm:w-52">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[var(--text-tertiary)]" aria-hidden />
                 <input
                   type="search"
                   placeholder="Rechercher..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  value={searchDraft}
+                  onChange={(e) => setSearchDraft(e.target.value)}
                   aria-label="Rechercher un produit"
-                  className="w-full h-9 pl-9 pr-4 rounded-xl text-xs bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none focus:border-cyan-500 transition-colors"
+                  className="w-full h-9 pl-9 pr-8 rounded-xl text-xs bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none focus:border-cyan-500 transition-colors"
                 />
+                {searchDraft && (
+                  <button
+                    onClick={() => setSearchDraft("")}
+                    aria-label="Effacer la recherche"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 h-5 w-5 flex items-center justify-center text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                )}
               </div>
 
-              {/* Tri */}
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+                onChange={(e) => updateParams({ sort: e.target.value, page: "1" })}
                 aria-label="Trier les produits"
                 className="h-9 px-3 rounded-xl text-xs bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] focus:outline-none focus:border-cyan-500 transition-colors"
               >
@@ -313,10 +548,8 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
         </div>
       </div>
 
-      {/* ── GRILLE PRODUITS ── */}
       <section className="section-py" aria-label={`${filtered.length} produit${filtered.length !== 1 ? "s" : ""}`}>
         <div className="container-dago">
-          {/* Résultats count */}
           <p className="text-sm text-[var(--text-tertiary)] mb-6 font-mono">
             {filtered.length} produit{filtered.length !== 1 ? "s" : ""}
             {activeCategory !== "all" && (
@@ -324,6 +557,9 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
             )}
             {search && (
               <> pour &laquo; <span className="text-cyan-400">{search}</span> &raquo;</>
+            )}
+            {totalPages > 1 && (
+              <> · page <span className="text-[var(--text-primary)]">{clampedPage}</span>/{totalPages}</>
             )}
           </p>
 
@@ -338,25 +574,29 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
               </p>
             </div>
           ) : (
-            <motion.div
-              variants={staggerGrid}
-              initial="hidden"
-              animate="visible"
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
-              role="list"
-              aria-label="Liste des produits"
-            >
-              {filtered.map((product) => (
-                <div key={product.id} role="listitem">
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </motion.div>
+            <>
+              <motion.div
+                key={`${activeCategory}-${search}-${sortBy}-${clampedPage}`}
+                variants={staggerGrid}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+                role="list"
+                aria-label="Liste des produits"
+              >
+                {pageItems.map((product) => (
+                  <div key={product.id} role="listitem">
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </motion.div>
+
+              <Pagination page={clampedPage} totalPages={totalPages} onPick={goToPage} />
+            </>
           )}
         </div>
       </section>
 
-      {/* ── BANNIÈRE INFO LIVRAISON ── */}
       <section className="py-10 bg-primary-950 border-t border-[var(--border)]">
         <div className="container-dago">
           <div
