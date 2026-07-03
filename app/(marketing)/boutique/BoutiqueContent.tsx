@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search, ShoppingCart, Eye, Heart } from "lucide-react";
 import type { Product, ProductCategory } from "@/lib/constants/products";
+import { CATEGORY_LABELS } from "@/lib/constants/products";
 import { useCartStore } from "@/lib/stores/cartStore";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Badge } from "@/components/atoms/Badge";
@@ -13,14 +14,16 @@ import { Button } from "@/components/ui/button";
 
 import { staggerGrid, fadeUp } from "@/lib/animations/variants";
 
-const CATEGORIES: Array<{ id: ProductCategory | "all"; label: string; emoji: string }> = [
-  { id: "all", label: "Tous", emoji: "📦" },
-  { id: "traceurs-gps", label: "Traceurs GPS", emoji: "📡" },
-  { id: "routeurs-wifi", label: "Routeurs WiFi", emoji: "📶" },
-  { id: "montres-connectees", label: "Montres", emoji: "⌚" },
-  { id: "alarmes", label: "Alarmes", emoji: "🔔" },
-  { id: "accessoires", label: "Accessoires", emoji: "🔧" },
-];
+function humanize(slug: string) {
+  return slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+function categoryMeta(id: string): { label: string; emoji: string } {
+  return CATEGORY_LABELS[id] ?? { label: humanize(id), emoji: "🏷️" };
+}
 
 const BADGE_MAP = {
   new: { variant: "new" as const, label: "Nouveau" },
@@ -175,6 +178,16 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"relevance" | "price-asc" | "price-desc">("relevance");
 
+  // Catégories dérivées dynamiquement des produits (comptage inclus)
+  const categories = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of products) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+    const list = Array.from(counts.entries())
+      .map(([id, count]) => ({ id, count, ...categoryMeta(id) }))
+      .sort((a, b) => b.count - a.count);
+    return [{ id: "all", label: "Tous", emoji: "📦", count: products.length }, ...list];
+  }, [products]);
+
   const filtered = useMemo(() => {
     let result = products;
     if (activeCategory !== "all") {
@@ -252,7 +265,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
               aria-label="Filtrer par catégorie"
               className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide flex-1"
             >
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
@@ -265,6 +278,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
                 >
                   <span>{cat.emoji}</span>
                   {cat.label}
+                  <span className="ml-1 text-[10px] opacity-60 font-mono">{cat.count}</span>
                 </button>
               ))}
             </nav>
@@ -306,7 +320,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
           <p className="text-sm text-[var(--text-tertiary)] mb-6 font-mono">
             {filtered.length} produit{filtered.length !== 1 ? "s" : ""}
             {activeCategory !== "all" && (
-              <> dans <span className="text-[var(--text-primary)]">{CATEGORIES.find((c) => c.id === activeCategory)?.label}</span></>
+              <> dans <span className="text-[var(--text-primary)]">{categoryMeta(activeCategory).label}</span></>
             )}
             {search && (
               <> pour &laquo; <span className="text-cyan-400">{search}</span> &raquo;</>

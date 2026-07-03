@@ -1,5 +1,5 @@
 import "server-only";
-import type { Product, ProductCategory } from "@/lib/constants/products";
+import type { Product } from "@/lib/constants/products";
 import { PRODUCTS } from "@/lib/constants/products";
 import { PRODUCT_OVERRIDES } from "@/lib/constants/product-overrides";
 
@@ -45,22 +45,6 @@ function token() {
   return v;
 }
 
-const CATEGORY_MAP: Record<string, ProductCategory> = {
-  "traceurs-gps": "traceurs-gps",
-  "gps": "traceurs-gps",
-  "traceur-gps": "traceurs-gps",
-  "routeurs-wifi": "routeurs-wifi",
-  "routeur-wifi": "routeurs-wifi",
-  "wifi": "routeurs-wifi",
-  "montres-connectees": "montres-connectees",
-  "montres": "montres-connectees",
-  "montre": "montres-connectees",
-  "alarmes": "alarmes",
-  "alarme": "alarmes",
-  "accessoires": "accessoires",
-  "accessoire": "accessoires",
-};
-
 function slugify(s: string) {
   return s
     .toLowerCase()
@@ -71,8 +55,8 @@ function slugify(s: string) {
 }
 
 export function toProduct(e: ErpProduct): Product {
-  const catKey = (e.category ?? "").toLowerCase().trim();
-  const category = CATEGORY_MAP[catKey] ?? "accessoires";
+  const rawCat = (e.category ?? "").trim();
+  const category = rawCat ? slugify(rawCat) : "accessoires";
   const desc = e.description ?? "";
   const base: Product = {
     id: e.sku,

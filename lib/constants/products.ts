@@ -1,9 +1,15 @@
-export type ProductCategory =
-  | "traceurs-gps"
-  | "routeurs-wifi"
-  | "montres-connectees"
-  | "alarmes"
-  | "accessoires";
+/** Catégorie produit — string libre (slug) pour accepter les catégories venant de l'ERP. */
+export type ProductCategory = string;
+
+/** Libellés + emojis pour les catégories "officielles" (fallback dérivé du slug sinon). */
+export const CATEGORY_LABELS: Record<string, { label: string; emoji: string }> = {
+  "traceurs-gps": { label: "Traceurs GPS", emoji: "📡" },
+  "routeurs-wifi": { label: "Routeurs WiFi", emoji: "📶" },
+  "montres-connectees": { label: "Montres", emoji: "⌚" },
+  "alarmes": { label: "Alarmes", emoji: "🔔" },
+  "accessoires": { label: "Accessoires", emoji: "🔧" },
+  "divers": { label: "Divers", emoji: "📦" },
+};
 
 export type Product = {
   id: string;
