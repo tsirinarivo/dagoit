@@ -187,16 +187,25 @@ function ProductCard({ product }: { product: Product }) {
               {formatPrice(product.price)}
             </p>
           </div>
-          <Button
-            variant="primary"
-            size="sm"
-            disabled={product.stock === "out_of_stock"}
-            onClick={() => addItem(product)}
-            rightIcon={<ShoppingCart className="h-3.5 w-3.5" />}
-            aria-label={`Ajouter ${product.name} au panier`}
-          >
-            {product.stock === "out_of_stock" ? "Indisponible" : "Ajouter"}
-          </Button>
+          {product.stock === "out_of_stock" ? (
+            <span
+              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg text-xs font-semibold bg-[var(--bg-tertiary)] border border-[var(--border)] text-[var(--text-tertiary)] cursor-not-allowed"
+              aria-label={`${product.name} indisponible`}
+            >
+              <X className="h-3.5 w-3.5" />
+              Indisponible
+            </span>
+          ) : (
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => addItem(product)}
+              rightIcon={<ShoppingCart className="h-3.5 w-3.5" />}
+              aria-label={`Ajouter ${product.name} au panier`}
+            >
+              Ajouter
+            </Button>
+          )}
         </div>
       </div>
     </motion.article>
