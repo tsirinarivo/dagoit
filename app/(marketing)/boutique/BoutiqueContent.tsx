@@ -189,10 +189,10 @@ function ProductCard({ product }: { product: Product }) {
           </div>
           {product.stock === "out_of_stock" ? (
             <span
-              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg text-xs font-semibold bg-[var(--bg-tertiary)] border border-[var(--border)] text-[var(--text-tertiary)] cursor-not-allowed"
+              className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-xs font-semibold bg-[var(--bg-tertiary)] border border-[var(--border)] text-[var(--text-tertiary)] cursor-not-allowed whitespace-nowrap shrink-0"
               aria-label={`${product.name} indisponible`}
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-3 w-3 shrink-0" />
               Indisponible
             </span>
           ) : (
