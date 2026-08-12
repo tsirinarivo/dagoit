@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_MG",
     alternateLocale: ["en_US"],
-    url: "https://dago-it.com",
+    url: siteUrl,
     siteName: "DAGO IT",
     title: "DAGO IT — Géolocalisation GPS & Solutions Tech Madagascar",
     description:

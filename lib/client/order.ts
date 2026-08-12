@@ -33,11 +33,10 @@ export function newExternalId() {
   const stamp =
     now.getFullYear().toString() +
     String(now.getMonth() + 1).padStart(2, "0") +
-    String(now.getDate()).padStart(2, "0") +
-    "-" +
-    String(now.getHours()).padStart(2, "0") +
-    String(now.getMinutes()).padStart(2, "0") +
-    String(now.getSeconds()).padStart(2, "0");
-  const rnd = Math.random().toString(36).slice(2, 6).toUpperCase();
-  return `WEB-${stamp}-${rnd}`;
+    String(now.getDate()).padStart(2, "0");
+  const uuid =
+    typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  return `WEB-${stamp}-${uuid}`;
 }

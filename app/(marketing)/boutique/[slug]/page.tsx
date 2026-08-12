@@ -125,7 +125,6 @@ export default async function ProductPage({ params }: Props) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-contain p-6"
                   priority
-                  unoptimized
                 />
               ) : (
                 <svg viewBox="0 0 300 300" className="h-48 w-auto opacity-20" fill="none" aria-hidden>

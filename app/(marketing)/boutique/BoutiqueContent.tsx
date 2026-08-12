@@ -106,7 +106,6 @@ function ProductCard({ product }: { product: Product }) {
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-contain p-4"
-            unoptimized
           />
         ) : (
           <svg viewBox="0 0 200 140" className="h-28 w-auto opacity-20" fill="none">

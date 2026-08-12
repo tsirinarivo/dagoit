@@ -29,6 +29,9 @@ export async function POST(req: Request) {
   if (!Array.isArray(body.items) || body.items.length === 0) {
     return bad("items required (non-empty array)");
   }
+  if (body.items.length > 50) {
+    return bad("too_many_items (max 50 lines per order)");
+  }
 
   const items: CreateOrderInput["items"] = [];
   for (const raw of body.items) {
@@ -37,7 +40,8 @@ export async function POST(req: Request) {
     if (typeof it.quantity !== "number" || !Number.isFinite(it.quantity) || it.quantity < 1) {
       return bad("item.quantity must be a positive number");
     }
-    items.push({ sku: it.sku, quantity: Math.floor(it.quantity) });
+    if (it.quantity > 100) return bad("item.quantity capped at 100 per line");
+    items.push({ sku: it.sku.slice(0, 128), quantity: Math.floor(it.quantity) });
   }
 
   let customer: CreateOrderInput["customer"] | undefined;
