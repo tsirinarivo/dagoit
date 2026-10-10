@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Wrench, MessageCircle, Clock, Phone, Mail } from "lucide-react";
+import { Wrench, Clock, Mail } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants/nav";
 
 export const metadata: Metadata = {
@@ -37,31 +36,15 @@ export default function MaintenancePage() {
 
         <div className="w-full border-t border-[var(--border)] pt-6 mt-2">
           <p className="text-xs text-[var(--text-tertiary)] mb-4">
-            Besoin urgent ? Contactez-nous directement
+            Besoin urgent ? Écrivez-nous
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href={`https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-green-600 hover:bg-green-500 text-white text-sm font-medium transition-colors"
-            >
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp
-            </a>
-            <a
-              href={`tel:${CONTACT_INFO.phone.replace(/\s/g, "")}`}
-              className="flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/40 text-sm font-medium transition-colors"
-            >
-              <Phone className="h-4 w-4 text-cyan-400" />
-              {CONTACT_INFO.phone}
-            </a>
+          <div className="flex justify-center">
             <a
               href={`mailto:${CONTACT_INFO.email}`}
-              className="flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/40 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-primary-900 text-sm font-semibold transition-colors"
             >
-              <Mail className="h-4 w-4 text-cyan-400" />
-              Email
+              <Mail className="h-4 w-4" />
+              {CONTACT_INFO.email}
             </a>
           </div>
         </div>
