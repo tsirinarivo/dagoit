@@ -7,8 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
   Server,
-  ShieldAlert,
-  Navigation,
   ShoppingBag,
   ChevronDown,
   Menu,
@@ -26,8 +24,6 @@ import { cn } from "@/lib/utils/cn";
 const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "/services/geolocalisation": <MapPin className="h-4 w-4" />,
   "/services/hebergement-web": <Server className="h-4 w-4" />,
-  "/services/alarme": <ShieldAlert className="h-4 w-4" />,
-  "/services/tracking-platform": <Navigation className="h-4 w-4" />,
 };
 
 function LogoSVG({ className }: { className?: string }) {

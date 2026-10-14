@@ -19,23 +19,6 @@ export const NAV_ITEMS: NavItem[] = [
         label: "Hébergement Web",
         href: "/services/hebergement-web",
       },
-      {
-        label: "Systèmes d'Alarme",
-        href: "/services/alarme",
-      },
-      {
-        label: "Plateforme Tracking",
-        href: "/services/tracking-platform",
-      },
-    ],
-  },
-  {
-    label: "Applications",
-    href: "/applications",
-    children: [
-      { label: "GrossistePPN", href: "/applications/grossiste-ppn", badge: "ERP" },
-      { label: "RestaurantOS", href: "/applications/restaurant-os" },
-      { label: "SMS Gate", href: "/applications/sms-gate" },
     ],
   },
   {

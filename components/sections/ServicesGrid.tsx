@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, Server, ShieldAlert, Navigation } from "lucide-react";
+import { ArrowUpRight, MapPin, Server } from "lucide-react";
 import { fadeUp, staggerGrid, defaultViewport } from "@/lib/animations/variants";
 import { Badge } from "@/components/atoms/Badge";
 
@@ -36,36 +36,6 @@ const SERVICES = [
     accent: "#A3FF12",
     gradient: "from-[#A3FF12]/10 to-[#0b3a6f]/20",
     borderHover: "hover:border-lime-500/50",
-  },
-  {
-    id: "alarme",
-    href: "/services/alarme",
-    icon: <ShieldAlert className="h-7 w-7" />,
-    badge: "Résidentiel & Pro",
-    badgeVariant: "orange" as const,
-    title: "Systèmes d'Alarme",
-    subtitle: "Sécurité complète",
-    description:
-      "Protection complète de vos locaux et domicile. Détecteurs de mouvement, sirènes, notifications instantanées sur mobile. Installation et maintenance.",
-    features: ["GSM + WiFi", "Notification push", "Caméras IP", "Télésurveillance"],
-    accent: "#FF6B35",
-    gradient: "from-[#FF6B35]/10 to-[#0b3a6f]/20",
-    borderHover: "hover:border-orange-500/50",
-  },
-  {
-    id: "tracking",
-    href: "/services/tracking-platform",
-    icon: <Navigation className="h-7 w-7" />,
-    badge: "app.fleet.mg",
-    badgeVariant: "cyan" as const,
-    title: "Plateforme Tracking",
-    subtitle: "Interface web & mobile",
-    description:
-      "Accédez à votre tableau de bord de suivi 24h/24. Historique des trajets, rapports PDF, gestion multi-utilisateurs. Application iOS et Android.",
-    features: ["Web + mobile", "Historique illimité", "Multi-utilisateurs", "Export PDF"],
-    accent: "#00E5FF",
-    gradient: "from-[#00E5FF]/10 to-[#0b3a6f]/20",
-    borderHover: "hover:border-cyan-500/50",
   },
 ];
 

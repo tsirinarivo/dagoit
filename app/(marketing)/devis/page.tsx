@@ -7,7 +7,7 @@ import { DevisForm } from "./DevisForm";
 export const metadata: Metadata = {
   title: "Demander un Devis — DAGO IT Madagascar",
   description:
-    "Obtenez un devis gratuit pour votre projet GPS, hébergement web ou système d'alarme. Réponse sous 24h. DAGO IT, Toamasina Madagascar.",
+    "Obtenez un devis gratuit pour votre projet GPS ou hébergement web. Réponse sous 24h. DAGO IT, Toamasina Madagascar.",
   openGraph: {
     title: "Devis Gratuit — DAGO IT Madagascar",
     description: "Décrivez votre projet, nous vous répondons sous 24h.",

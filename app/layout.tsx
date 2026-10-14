@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     default: "DAGO IT — Géolocalisation GPS & Solutions Tech Madagascar",
   },
   description:
-    "Leader malgache en géolocalisation GPS de véhicules, hébergement web et systèmes d'alarme. Optimisez votre flotte en temps réel. Basé à Antananarivo, Madagascar.",
+    "Leader malgache en géolocalisation GPS de véhicules et hébergement web haute performance. Optimisez votre flotte en temps réel. Basé à Toamasina, Madagascar.",
   keywords: [
     "géolocalisation GPS Madagascar",
     "traceur GPS voiture Madagascar",
@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     "hébergement web Madagascar",
     "dago-it",
     "DAGO IT",
-    "alarme entreprise Madagascar",
     "GPS tracker Antananarivo",
   ],
   authors: [{ name: "DAGO IT", url: "https://dago-it.com" }],

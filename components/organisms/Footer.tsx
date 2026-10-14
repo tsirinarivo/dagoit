@@ -7,14 +7,12 @@ const FOOTER_LINKS = {
   services: [
     { label: "Géolocalisation GPS", href: "/services/geolocalisation" },
     { label: "Hébergement Web", href: "/services/hebergement-web" },
-    { label: "Systèmes d'Alarme", href: "/services/alarme" },
-    { label: "Plateforme Tracking", href: "/services/tracking-platform" },
   ],
   boutique: [
     { label: "Traceurs GPS", href: "/boutique?cat=traceurs-gps" },
     { label: "Routeurs WiFi 4G", href: "/boutique?cat=routeurs-wifi" },
     { label: "Montres Connectées", href: "/boutique?cat=montres-connectees" },
-    { label: "Systèmes d'Alarme", href: "/boutique?cat=alarmes" },
+    { label: "Tous les produits", href: "/boutique" },
   ],
   company: [
     { label: "À propos de nous", href: "/a-propos" },

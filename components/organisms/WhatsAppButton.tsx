@@ -75,7 +75,7 @@ export function WhatsAppButton() {
             </div>
             <div className="bg-[var(--surface)] rounded-xl rounded-tl-none px-3.5 py-2.5 text-sm text-[var(--text-secondary)] mb-3">
               Bonjour 👋 Comment puis-je vous aider aujourd'hui ? Géolocalisation,
-              hébergement, alarme ou autre question ?
+              hébergement ou autre question ?
             </div>
             <a
               href={waLink}
