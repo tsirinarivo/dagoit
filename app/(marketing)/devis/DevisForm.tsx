@@ -25,14 +25,6 @@ type FormData = z.infer<typeof schema>;
 const SERVICES = [
   "Géolocalisation GPS / Flotte",
   "Hébergement Web",
-  "Système d'Alarme",
-  "Plateforme Tracking",
-  "Traceur GPS (achat)",
-  "GrossistePPN",
-  "TransHub",
-  "RestaurantOS",
-  "SMS Gate",
-  "Autre / Combinaison",
 ];
 
 export function DevisForm() {
