@@ -867,7 +867,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
               {
                 icon: "🛠️",
                 title: "Installation incluse",
-                desc: "Pour les traceurs GPS, installation par nos techniciens (25 000 Ar).",
+                desc: "Pour les traceurs GPS, installation par nos techniciens (35 000 Ar).",
               },
             ].map((item) => (
               <div
