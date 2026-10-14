@@ -253,7 +253,7 @@ export function PricingSection() {
           className="text-center text-sm text-[var(--text-tertiary)] mt-8"
         >
           Tous les prix sont hors taxes. La pose du matériel est facturée{" "}
-          <span className="text-[var(--text-primary)]">25 000 Ar</span> à
+          <span className="text-[var(--text-primary)]">35 000 Ar</span> à
           Antananarivo. Devis gratuit pour les flottes de 5 véhicules et plus.
         </motion.p>
       </div>
