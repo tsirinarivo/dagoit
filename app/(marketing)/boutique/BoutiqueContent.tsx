@@ -91,7 +91,10 @@ const STOCK_MAP = {
 function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCartStore();
   const [wishlist, setWishlist] = useState(false);
+  const [imgOk, setImgOk] = useState(true);
   const stockInfo = STOCK_MAP[product.stock];
+
+  const showImage = product.images[0] && imgOk;
 
   return (
     <motion.article
@@ -99,13 +102,14 @@ function ProductCard({ product }: { product: Product }) {
       className="group relative flex flex-col rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/30 transition-all duration-300 overflow-hidden hover:shadow-card"
     >
       <div className="relative h-48 bg-gradient-to-br from-primary-800 to-primary-700 flex items-center justify-center overflow-hidden">
-        {product.images[0] ? (
+        {showImage ? (
           <Image
             src={product.images[0]}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-contain p-4"
+            onError={() => setImgOk(false)}
           />
         ) : (
           <svg viewBox="0 0 200 140" className="h-28 w-auto opacity-20" fill="none">

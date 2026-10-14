@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     price: 250000,
     stock: "in_stock",
     badges: ["bestseller"],
-    images: ["/images/products/gps303-1.jpg", "/images/products/gps303-2.jpg"],
+    images: [],
     shortDescription:
       "Traceur GPS compact waterproof. Suivi temps réel, écoute à distance, alerte SOS.",
     description: `Le GPS303 est notre traceur GPS le plus populaire, idéal pour la surveillance de véhicules, motos et actifs de valeur à Madagascar.
@@ -68,10 +68,7 @@ export const PRODUCTS: Product[] = [
     priceOld: 220000,
     stock: "in_stock",
     badges: ["promo"],
-    images: [
-      "/images/products/huawei-e5172-1.jpg",
-      "/images/products/huawei-e5172-2.jpg",
-    ],
+    images: [],
     shortDescription:
       "Routeur WiFi 4G LTE haute performance. Jusqu'à 32 connexions simultanées.",
     description: `Le Huawei E5172 est un routeur WiFi 4G LTE professionnel parfait pour les bureaux, points de vente et véhicules en déplacement à Madagascar.
@@ -98,10 +95,7 @@ export const PRODUCTS: Product[] = [
     price: 145000,
     stock: "in_stock",
     badges: ["new"],
-    images: [
-      "/images/products/alcatel-ee120-1.jpg",
-      "/images/products/alcatel-ee120-2.jpg",
-    ],
+    images: [],
     shortDescription:
       "Point d'accès WiFi 4G compact. Idéal pour usage nomade et professionnel.",
     description: `L'Alcatel EE120 est un hotspot WiFi 4G ultra-compact pour les professionnels en déplacement.
@@ -127,11 +121,7 @@ export const PRODUCTS: Product[] = [
     price: 175000,
     stock: "low_stock",
     badges: ["bestseller"],
-    images: [
-      "/images/products/q90-1.jpg",
-      "/images/products/q90-2.jpg",
-      "/images/products/q90-3.jpg",
-    ],
+    images: [],
     shortDescription:
       "Montre GPS enfant avec suivi en temps réel, appels SOS et zone de sécurité.",
     description: `La montre Q90 est conçue pour rassurer les parents malgaches. Suivez la position de vos enfants en temps réel, recevez des alertes quand ils sortent de la zone définie (école, maison) et communiquez avec eux directement depuis l'application.`,
@@ -157,10 +147,7 @@ export const PRODUCTS: Product[] = [
     price: 480000,
     stock: "in_stock",
     badges: ["new"],
-    images: [
-      "/images/products/alarme-pro-1.jpg",
-      "/images/products/alarme-pro-2.jpg",
-    ],
+    images: [],
     shortDescription:
       "Système d'alarme complet pour entreprise. 8 zones, GSM + WiFi, sirène 110dB.",
     description: `Le kit Pro 8Z est notre solution d'alarme professionnelle pour entreprises et commerces à Madagascar.
