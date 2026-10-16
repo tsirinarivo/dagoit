@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import {
   Zap,
   ShieldCheck,
-  Fuel,
-  Headphones,
   MapPin,
   BarChart3,
   Bell,
@@ -38,20 +36,6 @@ const FEATURES: Feature[] = [
     accent: "lime",
   },
   {
-    icon: <Fuel className="h-6 w-6" />,
-    title: "Économies carburant",
-    description:
-      "Identifiez les trajets inutiles et les excès de vitesse. Nos clients réduisent leur consommation de carburant de 15 à 30%.",
-    accent: "orange",
-  },
-  {
-    icon: <Headphones className="h-6 w-6" />,
-    title: "Support local 24h/7j",
-    description:
-      "Une équipe basée à Antananarivo, joignable par téléphone, email ou WhatsApp. Pas de centre d'appel étranger.",
-    accent: "cyan",
-  },
-  {
     icon: <MapPin className="h-6 w-6" />,
     title: "Géofencing intelligent",
     description:
@@ -63,7 +47,7 @@ const FEATURES: Feature[] = [
     icon: <BarChart3 className="h-6 w-6" />,
     title: "Rapports détaillés",
     description:
-      "Historique complet des trajets, rapport kilométrique, temps d'arrêt, identification des conducteurs.",
+      "Historique complet des trajets, rapport kilométrique, temps d'arrêt.",
     accent: "orange",
   },
   {

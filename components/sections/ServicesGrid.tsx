@@ -17,7 +17,7 @@ const SERVICES = [
     subtitle: "Flotte professionnelle",
     description:
       "Suivez chaque véhicule de votre flotte en temps réel. Coupe-moteur à distance, géofencing, alertes SMS. Solutions pour ambulances, transporteurs, entreprises.",
-    features: ["Temps réel 10s", "Coupe-moteur", "Géofencing", "Badge chauffeur"],
+    features: ["Temps réel 10s", "Coupe-moteur", "Géofencing", "Alertes SMS"],
     accent: "#00E5FF",
     gradient: "from-[#00E5FF]/10 to-[#0b3a6f]/20",
     borderHover: "hover:border-cyan-500/50",

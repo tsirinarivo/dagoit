@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check, MapPin, Zap, ShieldCheck, Bell, Navigation, Users, BarChart3, Fuel, Clock, Download } from "lucide-react";
+import { ArrowRight, Check, MapPin, Zap, ShieldCheck, Bell, Navigation, BarChart3, Clock, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/atoms/Badge";
 import { PricingSection } from "@/components/sections/PricingSection";
@@ -9,7 +9,7 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const metadata: Metadata = {
   title: "Géolocalisation GPS Véhicules Madagascar — DAGO IT",
   description:
-    "Suivez votre flotte en temps réel à Madagascar. Coupe-moteur, géofencing, alertes SMS, identification chauffeur. Dès 32 500 Ar/mois + matériel. Installation à Antananarivo.",
+    "Suivez votre flotte en temps réel à Madagascar. Coupe-moteur, géofencing, alertes SMS. Dès 32 500 Ar/mois + matériel. Installation à Antananarivo.",
   keywords: [
     "géolocalisation GPS Madagascar",
     "traceur GPS flotte Madagascar",
@@ -54,25 +54,11 @@ const FEATURES_DETAIL = [
     color: "cyan",
   },
   {
-    icon: <Users className="h-6 w-6" />,
-    title: "Identification chauffeur",
-    description:
-      "Attribuez un badge RFID à chaque conducteur. Sachez qui conduit quel véhicule, quand et sur quel trajet. Responsabilisez vos équipes.",
-    color: "lime",
-  },
-  {
     icon: <BarChart3 className="h-6 w-6" />,
     title: "Rapports & analyses",
     description:
       "Rapports kilométriques automatiques, temps de conduite, temps d'arrêt, score éco-conduite. Exportez en PDF ou CSV pour votre comptabilité.",
     color: "orange",
-  },
-  {
-    icon: <Fuel className="h-6 w-6" />,
-    title: "Optimisation carburant",
-    description:
-      "Identifiez les trajets inutiles, les ralentis excessifs et les dépassements de vitesse. Nos clients économisent en moyenne 15 à 30% de carburant.",
-    color: "cyan",
   },
   {
     icon: <Clock className="h-6 w-6" />,
@@ -88,15 +74,15 @@ const USE_CASES = [
     icon: "🚑",
     title: "Ambulances & urgences",
     description:
-      "Dispatchez l'ambulance la plus proche. Réduisez votre temps de réponse de 30% en moyenne. Plusieurs cliniques à Antananarivo nous font déjà confiance.",
-    stats: "–30% temps de réponse",
+      "Dispatchez l'ambulance la plus proche. Réduisez votre temps de réponse grâce à une visibilité temps réel sur toute votre flotte médicale.",
+    stats: "Réactivité améliorée",
   },
   {
     icon: "🚚",
     title: "Transport & logistique",
     description:
-      "Suivez vos camions sur les routes nationales. Contrôlez les heures de départ et d'arrivée. Éliminez les détours non autorisés et le carburant détourné.",
-    stats: "–20% coûts opérationnels",
+      "Suivez vos camions sur les routes nationales. Contrôlez les heures de départ et d'arrivée. Éliminez les détours non autorisés.",
+    stats: "Contrôle total du parc",
   },
   {
     icon: "🛵",
@@ -118,13 +104,6 @@ const USE_CASES = [
     description:
       "Coordinateurs : sachez en permanence où sont vos véhicules médicaux. Garantissez la traçabilité des transports de médicaments et d'organes.",
     stats: "Traçabilité totale",
-  },
-  {
-    icon: "🏢",
-    title: "Entreprises multi-secteurs",
-    description:
-      "Votre parc auto d'entreprise (directeurs, commerciaux, techniciens) entièrement sous contrôle. Politique de conduite, utilisation personnelle détectée.",
-    stats: "ROI en moins de 6 mois",
   },
 ];
 
@@ -365,77 +344,6 @@ export default function GeolocalisationPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── COMMENT ÇA MARCHE ── */}
-      <section className="section-py" aria-labelledby="how-heading">
-        <div className="container-dago">
-          <div className="text-center mb-14">
-            <p className="text-xs font-mono uppercase tracking-widest text-cyan-500 mb-3">
-              Processus
-            </p>
-            <h2
-              id="how-heading"
-              className="font-display font-black text-[clamp(2rem,4vw,3rem)] tracking-tight"
-            >
-              Opérationnel en{" "}
-              <span className="gradient-text-cyan">3 étapes simples</span>
-            </h2>
-          </div>
-
-          <ol
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-            role="list"
-          >
-            {[
-              {
-                step: "01",
-                title: "Commande & livraison",
-                description:
-                  "Choisissez votre plan GPS en ligne ou par téléphone. Le boîtier GPS vous est livré ou nous venons directement sur site.",
-                color: "#00E5FF",
-              },
-              {
-                step: "02",
-                title: "Installation rapide",
-                description:
-                  "Nos techniciens installent le traceur sur votre véhicule en 45 à 90 minutes. Connexion sur la batterie et le réseau GSM.",
-                color: "#A3FF12",
-              },
-              {
-                step: "03",
-                title: "Suivi en temps réel",
-                description:
-                  "Accédez immédiatement à la plateforme web et à l'application mobile. Formation de 30 minutes incluse.",
-                color: "#FF6B35",
-              },
-            ].map((step, i) => (
-              <li key={step.step} role="listitem" className="flex flex-col items-center text-center gap-4">
-                <div
-                  className="h-16 w-16 rounded-2xl flex items-center justify-center font-mono font-black text-2xl"
-                  style={{ background: `${step.color}15`, color: step.color }}
-                  aria-label={`Étape ${step.step}`}
-                >
-                  {step.step}
-                </div>
-                {i < 2 && (
-                  <div
-                    aria-hidden
-                    className="hidden md:block absolute ml-16 mt-8 text-[var(--text-tertiary)]"
-                  >
-                    →
-                  </div>
-                )}
-                <h3 className="font-display font-semibold text-[var(--text-primary)]">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-xs">
-                  {step.description}
-                </p>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
