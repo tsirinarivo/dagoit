@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PRODUCTS } from "@/lib/constants/products";
+import { BOUTIQUE_ENABLED } from "@/lib/constants/nav";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dago-it.com";
 
@@ -11,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/services/geolocalisation`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/services/hebergement-web`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/boutique`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/a-propos`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/realisations`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/ressources`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
@@ -22,12 +22,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/legal/confidentialite`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const productPages: MetadataRoute.Sitemap = PRODUCTS.map((p) => ({
-    url: `${BASE}/boutique/${p.slug}`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
+  if (!BOUTIQUE_ENABLED) {
+    return staticPages;
+  }
 
-  return [...staticPages, ...productPages];
+  const boutiquePages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/boutique`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    ...PRODUCTS.map((p) => ({
+      url: `${BASE}/boutique/${p.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  ];
+
+  return [...staticPages, ...boutiquePages];
 }

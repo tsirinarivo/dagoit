@@ -15,7 +15,7 @@ import {
   Sun,
   ShoppingCart,
 } from "lucide-react";
-import { NAV_ITEMS, CONTACT_INFO } from "@/lib/constants/nav";
+import { NAV_ITEMS, CONTACT_INFO, BOUTIQUE_ENABLED } from "@/lib/constants/nav";
 import { useCartStore } from "@/lib/stores/cartStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/atoms/Badge";
@@ -222,18 +222,20 @@ export function Header() {
             </button>
 
             {/* Panier */}
-            <button
-              onClick={openCart}
-              aria-label={`Panier — ${count} article${count !== 1 ? "s" : ""}`}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)] transition-colors"
-            >
-              <ShoppingCart className="h-4.5 w-4.5" />
-              {count > 0 && (
-                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-cyan-500 text-primary-900 text-[10px] font-bold flex items-center justify-center">
-                  {count > 9 ? "9+" : count}
-                </span>
-              )}
-            </button>
+            {BOUTIQUE_ENABLED && (
+              <button
+                onClick={openCart}
+                aria-label={`Panier — ${count} article${count !== 1 ? "s" : ""}`}
+                className="relative flex h-9 w-9 items-center justify-center rounded-xl text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)] transition-colors"
+              >
+                <ShoppingCart className="h-4.5 w-4.5" />
+                {count > 0 && (
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-cyan-500 text-primary-900 text-[10px] font-bold flex items-center justify-center">
+                    {count > 9 ? "9+" : count}
+                  </span>
+                )}
+              </button>
+            )}
 
             {/* CTA démo */}
             <Button

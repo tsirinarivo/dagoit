@@ -8,32 +8,47 @@ const MAINTENANCE_ALLOWLIST = [
   "/opengraph-image",
 ];
 
-export function middleware(req: NextRequest) {
-  if (process.env.MAINTENANCE_MODE !== "true") {
-    return NextResponse.next();
-  }
+// Routes bloquées quand BOUTIQUE_ENABLED=false
+const BOUTIQUE_ROUTES = ["/boutique", "/checkout", "/api/erp"];
 
-  const { pathname } = req.nextUrl;
-
-  // Laisser passer les assets statiques Next et notre allowlist
-  if (
+function isAssetOrAllowed(pathname: string) {
+  return (
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/images/") ||
     pathname.startsWith("/fonts/") ||
     pathname.startsWith("/icons/") ||
     pathname.startsWith("/textures/") ||
     MAINTENANCE_ALLOWLIST.some((p) => pathname === p || pathname.startsWith(p + "/"))
-  ) {
-    return NextResponse.next();
+  );
+}
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // 1. Maintenance globale — tout bloqué sauf health et assets
+  if (process.env.MAINTENANCE_MODE === "true") {
+    if (isAssetOrAllowed(pathname)) return NextResponse.next();
+    const url = req.nextUrl.clone();
+    url.pathname = "/maintenance";
+    const res = NextResponse.rewrite(url, { status: 503 });
+    res.headers.set("Retry-After", "3600");
+    res.headers.set("Cache-Control", "no-store");
+    return res;
   }
 
-  // Rewrite vers /maintenance, status 503 (SEO-safe)
-  const url = req.nextUrl.clone();
-  url.pathname = "/maintenance";
-  const res = NextResponse.rewrite(url, { status: 503 });
-  res.headers.set("Retry-After", "3600");
-  res.headers.set("Cache-Control", "no-store");
-  return res;
+  // 2. Boutique désactivée — redirection vers l'accueil
+  if (process.env.NEXT_PUBLIC_BOUTIQUE_ENABLED === "false") {
+    const isBoutique = BOUTIQUE_ROUTES.some(
+      (p) => pathname === p || pathname.startsWith(p + "/"),
+    );
+    if (isBoutique) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url, { status: 307 });
+    }
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

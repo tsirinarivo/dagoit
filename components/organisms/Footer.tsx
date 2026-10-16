@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
-import { CONTACT_INFO } from "@/lib/constants/nav";
+import { CONTACT_INFO, BOUTIQUE_ENABLED } from "@/lib/constants/nav";
 import { Badge } from "@/components/atoms/Badge";
 
 const FOOTER_LINKS = {
@@ -198,23 +198,25 @@ export function Footer() {
           </div>
 
           {/* Boutique */}
-          <div>
-            <h3 className="text-xs font-mono font-medium uppercase tracking-widest text-[var(--text-tertiary)] mb-4">
-              Boutique
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {FOOTER_LINKS.boutique.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] inline-flex transition-colors duration-150"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {BOUTIQUE_ENABLED && (
+            <div>
+              <h3 className="text-xs font-mono font-medium uppercase tracking-widest text-[var(--text-tertiary)] mb-4">
+                Boutique
+              </h3>
+              <ul className="flex flex-col gap-2.5">
+                {FOOTER_LINKS.boutique.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] inline-flex transition-colors duration-150"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Société */}
           <div>

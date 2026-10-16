@@ -5,7 +5,7 @@ export type NavItem = {
   badge?: string;
 };
 
-export const NAV_ITEMS: NavItem[] = [
+const ALL_NAV_ITEMS: NavItem[] = [
   {
     label: "Services",
     href: "/services",
@@ -38,6 +38,13 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/a-propos",
   },
 ];
+
+export const BOUTIQUE_ENABLED =
+  process.env.NEXT_PUBLIC_BOUTIQUE_ENABLED !== "false";
+
+export const NAV_ITEMS: NavItem[] = BOUTIQUE_ENABLED
+  ? ALL_NAV_ITEMS
+  : ALL_NAV_ITEMS.filter((i) => i.href !== "/boutique");
 
 export const CONTACT_INFO = {
   phone: "+261 32 05 767 77",
