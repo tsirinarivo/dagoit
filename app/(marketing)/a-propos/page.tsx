@@ -8,10 +8,10 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const metadata: Metadata = {
   title: "À Propos — DAGO IT Madagascar",
   description:
-    "DAGO IT : 8 ans d'expertise en géolocalisation GPS, hébergement web et systèmes d'alarme à Madagascar. Notre mission, notre équipe, nos valeurs.",
+    "DAGO IT : géolocalisation GPS et hébergement web à Madagascar. Notre mission, notre équipe, nos valeurs.",
   openGraph: {
     title: "À Propos de DAGO IT — Tech Made in Madagascar",
-    description: "8 ans d'expertise tech au service des entreprises malgaches.",
+    description: "Spécialiste tech au service des entreprises malgaches.",
   },
 };
 
@@ -33,7 +33,7 @@ const VALUES = [
     icon: Zap,
     title: "Réactivité",
     description:
-      "Support technique disponible 6j/7. Intervention sur site à Antananarivo sous 48h. Astreinte pour les parcs critiques.",
+      "Support technique disponible 6j/7. Intervention sur site à Toamasina et déplacements programmés dans les autres régions. Astreinte pour les parcs critiques.",
   },
   {
     icon: Shield,
@@ -54,7 +54,7 @@ const TIMELINE = [
     year: "2016",
     title: "Fondation de DAGO IT",
     description:
-      "Lancement à Antananarivo avec un premier contrat de géolocalisation pour une flotte de taxi.",
+      "Lancement à Toamasina avec un premier contrat de géolocalisation.",
   },
   {
     year: "2018",
@@ -68,18 +68,6 @@ const TIMELINE = [
     description:
       "Ouverture de DAGO Hosting pour répondre aux besoins web des entreprises partenaires.",
   },
-  {
-    year: "2022",
-    title: "Division Alarmes & Sécurité",
-    description:
-      "Lancement des systèmes d'alarme intégrés pour PME, résidences et sites industriels.",
-  },
-  {
-    year: "2024",
-    title: "500+ véhicules suivis",
-    description:
-      "Franchissement du cap des 500 véhicules actifs sur la plateforme, avec des clients dans 6 régions de Madagascar.",
-  },
 ];
 
 export default function AProposPage() {
@@ -89,7 +77,7 @@ export default function AProposPage() {
       <section className="container-dago mb-20">
         <div className="max-w-3xl">
           <Badge variant="neutral" className="mb-6">
-            Fondée en 2016 · Antananarivo
+            Fondée en 2016 · Toamasina
           </Badge>
           <h1 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-6">
             La tech au service des{" "}
@@ -97,9 +85,9 @@ export default function AProposPage() {
           </h1>
           <p className="text-lg text-[var(--text-secondary)] leading-relaxed mb-8 max-w-2xl">
             DAGO IT est une entreprise malgache spécialisée dans la géolocalisation
-            GPS, l'hébergement web et les systèmes d'alarme. Depuis 2016, nous
-            accompagnons les PME, transporteurs et institutions de Madagascar dans
-            leur transformation digitale.
+            GPS et l'hébergement web. Depuis 2016, nous accompagnons les PME,
+            transporteurs et institutions de Madagascar dans leur transformation
+            digitale.
           </p>
           <Button variant="primary" size="lg" asChild rightIcon={<ArrowRight className="h-4 w-4" />}>
             <Link href="/devis">Démarrer un projet</Link>

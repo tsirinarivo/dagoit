@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check, MapPin, Zap, ShieldCheck, Bell, Navigation, BarChart3, Clock, Download } from "lucide-react";
+import { ArrowRight, Zap, ShieldCheck, Bell, Navigation, BarChart3, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/atoms/Badge";
 import { PricingSection } from "@/components/sections/PricingSection";

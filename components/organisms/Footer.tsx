@@ -16,7 +16,6 @@ const FOOTER_LINKS = {
   ],
   company: [
     { label: "À propos de nous", href: "/a-propos" },
-    { label: "Nos réalisations", href: "/realisations" },
     { label: "Blog & Ressources", href: "/ressources" },
     { label: "Espace client", href: "/compte" },
     { label: "Demander un devis", href: "/devis" },

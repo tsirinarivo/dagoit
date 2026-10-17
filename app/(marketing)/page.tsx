@@ -5,13 +5,12 @@ import { WhyDagoIT } from "@/components/sections/WhyDagoIT";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { StatsSection } from "@/components/sections/StatsSection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export const metadata: Metadata = {
   title: "DAGO IT — Géolocalisation GPS & Solutions Tech Madagascar",
   description:
-    "Leader malgache en géolocalisation GPS de véhicules, hébergement web et systèmes d'alarme. Suivez votre flotte en temps réel depuis Antananarivo.",
+    "Spécialiste malgache de la géolocalisation GPS de véhicules et de l'hébergement web haute performance. Suivez votre flotte en temps réel depuis Toamasina.",
   openGraph: {
     title: "DAGO IT — Maîtrisez votre flotte en temps réel",
     description:
@@ -31,7 +30,7 @@ export default function HomePage() {
             "@type": "LocalBusiness",
             name: "DAGO IT",
             description:
-              "Solutions de géolocalisation GPS professionnelle, hébergement web et systèmes d'alarme à Madagascar.",
+              "Solutions de géolocalisation GPS professionnelle et hébergement web à Madagascar.",
             url: "https://dago-it.com",
             telephone: "+261320576777",
             email: "contact@dago-it.com",
@@ -79,7 +78,6 @@ export default function HomePage() {
       <ServicesGrid />
       <PricingSection />
       <StatsSection />
-      <TestimonialsSection />
       <FinalCTA />
     </>
   );

@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
   Server,
-  ShoppingBag,
   ChevronDown,
   Menu,
   X,

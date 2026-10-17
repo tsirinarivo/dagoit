@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "DAGO IT — Solutions Tech Madagascar",
     short_name: "DAGO IT",
-    description: "Géolocalisation GPS, hébergement web et alarmes à Madagascar",
+    description: "Géolocalisation GPS et hébergement web professionnels à Madagascar",
     start_url: "/",
     display: "standalone",
     background_color: "#0a1628",

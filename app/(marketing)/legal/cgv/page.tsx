@@ -22,7 +22,7 @@ export default function CGVPage() {
             {
               title: "1. Objet",
               content:
-                "Les présentes conditions générales de vente régissent les relations contractuelles entre DAGO IT et ses clients dans le cadre de la vente de matériel GPS, d'abonnements de géolocalisation, d'hébergement web et de systèmes d'alarme.",
+                "Les présentes conditions générales de vente régissent les relations contractuelles entre DAGO IT et ses clients dans le cadre de la vente de matériel GPS, d'abonnements de géolocalisation et de services d'hébergement web.",
             },
             {
               title: "2. Commandes",
@@ -37,7 +37,7 @@ export default function CGVPage() {
             {
               title: "4. Livraison et installation",
               content:
-                "La livraison du matériel est effectuée dans un délai de 3 à 7 jours ouvrés pour Antananarivo, et de 7 à 14 jours pour les autres régions. L'installation est incluse dans les offres mentionnées comme telles. Les frais de déplacement hors Antananarivo sont facturés séparément.",
+                "La livraison du matériel est effectuée dans un délai de 3 à 7 jours ouvrés pour Toamasina et Antananarivo, et de 7 à 14 jours pour les autres régions. L'installation est incluse dans les offres mentionnées comme telles. Les frais de déplacement hors des zones de couverture sont facturés séparément.",
             },
             {
               title: "5. Garanties",
@@ -57,7 +57,7 @@ export default function CGVPage() {
             {
               title: "8. Droit applicable",
               content:
-                "Les présentes CGV sont soumises au droit malgache. En cas de litige, les parties s'engagent à rechercher une solution amiable avant tout recours judiciaire. À défaut, les tribunaux d'Antananarivo sont seuls compétents.",
+                "Les présentes CGV sont soumises au droit malgache. En cas de litige, les parties s'engagent à rechercher une solution amiable avant tout recours judiciaire. À défaut, les tribunaux de Toamasina sont seuls compétents.",
             },
           ].map((section) => (
             <section key={section.title}>

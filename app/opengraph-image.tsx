@@ -48,7 +48,7 @@ export default function OGImage() {
 
         {/* Description */}
         <div style={{ fontSize: 26, color: "rgba(255,255,255,0.6)", maxWidth: 700, lineHeight: 1.4, display: "flex" }}>
-          Suivez votre flotte en temps réel. Hébergement web. Alarmes. Antananarivo, Madagascar.
+          Suivez votre flotte en temps réel. Hébergement web haute performance. Toamasina, Madagascar.
         </div>
 
         {/* URL */}

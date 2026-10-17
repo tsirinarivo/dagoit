@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Point d'entrée cPanel — délègue au serveur standalone Next.js
 process.chdir(__dirname);
 

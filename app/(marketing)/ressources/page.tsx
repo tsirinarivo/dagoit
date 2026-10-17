@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, FileText, HelpCircle } from "lucide-react";
+import { ArrowRight, BookOpen, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/atoms/Badge";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -8,10 +8,10 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const metadata: Metadata = {
   title: "Ressources & Guides — DAGO IT Madagascar",
   description:
-    "Guides pratiques, FAQ, tutoriels vidéo et documentation technique sur la géolocalisation GPS, l'hébergement web et les systèmes d'alarme à Madagascar.",
+    "Guides pratiques, FAQ, tutoriels vidéo et documentation technique sur la géolocalisation GPS et l'hébergement web à Madagascar.",
   openGraph: {
     title: "Ressources DAGO IT — Guides Tech Madagascar",
-    description: "Guides GPS, hébergement et alarmes pour les entreprises malgaches.",
+    description: "Guides GPS et hébergement pour les entreprises malgaches.",
   },
 };
 
@@ -72,41 +72,16 @@ const GUIDES = [
       },
     ],
   },
-  {
-    category: "Alarmes & Sécurité",
-    color: "orange" as const,
-    icon: <HelpCircle className="h-5 w-5" />,
-    articles: [
-      {
-        title: "Évaluer les risques sécuritaires de votre local",
-        excerpt: "Méthodologie pour identifier les points d'entrée vulnérables, les angles morts et les priorités d'installation.",
-        readTime: "6 min",
-        tag: "Guide",
-      },
-      {
-        title: "Alarme sans fil vs câblée : que choisir ?",
-        excerpt: "Comparatif technique, coûts d'installation, fiabilité, évolutivité. Recommandations selon le type de bâtiment.",
-        readTime: "5 min",
-        tag: "Comparatif",
-      },
-      {
-        title: "Que faire en cas d'intrusion ? Procédures d'urgence",
-        excerpt: "Protocoles recommandés pour réagir efficacement : ne pas intervenir seul, contacter le 117, préserver les preuves.",
-        readTime: "3 min",
-        tag: "Sécurité",
-      },
-    ],
-  },
 ];
 
 const FAQ_GENERAL = [
   {
-    q: "DAGO IT intervient-il en dehors d'Antananarivo ?",
-    a: "Oui. Nous intervenons régulièrement à Toamasina, Antsirabe, Mahajanga, Fianarantsoa et Toliara pour les flottes de 5 véhicules et plus. Des frais de déplacement s'appliquent selon la distance.",
+    q: "DAGO IT intervient-il en dehors de Toamasina ?",
+    a: "Oui. Nous intervenons à Antananarivo, Antsirabe, Mahajanga, Fianarantsoa et Toliara pour les flottes de 5 véhicules et plus. Des frais de déplacement s'appliquent selon la distance.",
   },
   {
     q: "Comment puis-je payer ? Mvola, Orange Money acceptés ?",
-    a: "Oui. Nous acceptons les paiements par Mvola, Orange Money, carte bancaire (Visa/Mastercard) et virement bancaire. Le paiement en espèces est possible pour les commandes en agence à Antananarivo.",
+    a: "Oui. Nous acceptons les paiements par Mvola, Orange Money, carte bancaire (Visa/Mastercard) et virement bancaire. Le paiement en espèces est possible pour les commandes en agence à Toamasina.",
   },
   {
     q: "Proposez-vous des contrats de maintenance ?",
@@ -114,11 +89,11 @@ const FAQ_GENERAL = [
   },
   {
     q: "Puis-je essayer avant d'acheter ?",
-    a: "Pour le GPS : oui, nous proposons une démo gratuite de 7 jours sur 1 véhicule. Pour l'hébergement : 30 jours satisfait ou remboursé. Pour les alarmes : démonstration sur site gratuite.",
+    a: "Pour le GPS : oui, nous proposons une démo gratuite de 7 jours sur 1 véhicule. Pour l'hébergement : 30 jours satisfait ou remboursé.",
   },
   {
     q: "Avez-vous des références dans mon secteur ?",
-    a: "Nous travaillons avec des cliniques, hôtels, ONG, transporteurs, entreprises BTP et commerces. Consultez notre page Réalisations ou contactez-nous pour une référence spécifique à votre secteur.",
+    a: "Nous accompagnons des entreprises de secteurs variés : transport, santé, hôtellerie, BTP, ONG et commerces. Contactez-nous pour une référence adaptée à votre secteur.",
   },
 ];
 

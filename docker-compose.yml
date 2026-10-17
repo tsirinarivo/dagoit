@@ -1,10 +1,29 @@
 services:
   dagoit:
-    build: .
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://dago-it.com}
+        NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME:-DAGO IT}
+        NEXT_PUBLIC_BOUTIQUE_ENABLED: ${NEXT_PUBLIC_BOUTIQUE_ENABLED:-true}
+        NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER:-261320576777}
     container_name: dagoit
     restart: unless-stopped
     ports:
       - "127.0.0.1:8085:3000"
+    env_file:
+      - .env.local
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_SITE_URL=https://dago-it.com
+    mem_limit: 1g
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

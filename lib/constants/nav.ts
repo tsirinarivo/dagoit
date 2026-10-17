@@ -26,10 +26,6 @@ const ALL_NAV_ITEMS: NavItem[] = [
     href: "/boutique",
   },
   {
-    label: "Réalisations",
-    href: "/realisations",
-  },
-  {
     label: "Ressources",
     href: "/ressources",
   },
