@@ -61,7 +61,7 @@ export default function HomePage() {
                 closes: "12:00",
               },
             ],
-            priceRange: "32500 Ar – 95000 Ar/mois",
+            priceRange: "32500 Ar – 55000 Ar/mois",
             currenciesAccepted: "MGA, EUR",
             paymentAccepted: "Mvola, Orange Money, Airtel Money, Carte bancaire, Virement",
             areaServed: "Madagascar",

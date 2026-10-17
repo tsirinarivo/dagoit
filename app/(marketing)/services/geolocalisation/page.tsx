@@ -151,8 +151,8 @@ export default function GeolocalisationPage() {
             areaServed: "Madagascar",
             offers: {
               "@type": "AggregateOffer",
-              lowPrice: "27500",
-              highPrice: "45000",
+              lowPrice: "32500",
+              highPrice: "55000",
               priceCurrency: "MGA",
               offerCount: 3,
             },
