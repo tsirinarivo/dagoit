@@ -81,48 +81,6 @@ const FEATURES = [
   },
 ];
 
-const PLANS = [
-  {
-    name: "Starter",
-    price: "25 000",
-    period: "/mois",
-    description: "Site vitrine ou blog",
-    storage: "5 Go SSD",
-    domains: "1 domaine",
-    emails: "5 comptes email",
-    databases: "2 bases MySQL",
-    bandwidth: "50 Go/mois",
-    highlight: false,
-    color: "cyan",
-  },
-  {
-    name: "Business",
-    price: "55 000",
-    period: "/mois",
-    description: "PME & e-commerce",
-    storage: "25 Go SSD NVMe",
-    domains: "5 domaines",
-    emails: "Illimité",
-    databases: "10 bases MySQL",
-    bandwidth: "200 Go/mois",
-    highlight: true,
-    color: "lime",
-  },
-  {
-    name: "Pro",
-    price: "120 000",
-    period: "/mois",
-    description: "Applications & forte charge",
-    storage: "100 Go SSD NVMe",
-    domains: "Illimité",
-    emails: "Illimité",
-    databases: "Illimité",
-    bandwidth: "Illimitée",
-    highlight: false,
-    color: "orange",
-  },
-];
-
 export default function HebergementWebPage() {
   return (
     <>
@@ -235,68 +193,6 @@ export default function HebergementWebPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── PLANS ── */}
-      <section id="plans" className="section-py bg-primary-950" aria-labelledby="plans-heading">
-        <div className="container-dago">
-          <div className="text-center mb-14">
-            <p className="text-xs font-mono uppercase tracking-widest text-cyan-500 mb-3">Tarifs</p>
-            <h2 id="plans-heading" className="font-display font-black text-[clamp(2rem,4vw,3rem)] tracking-tight">
-              Plans simples,
-              <br />
-              <span className="gradient-text-cyan">sans surprise</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {PLANS.map((plan) => (
-              <article
-                key={plan.name}
-                className={`flex flex-col gap-4 p-6 rounded-2xl border transition-all duration-200 ${
-                  plan.highlight
-                    ? "bg-lime-500/5 border-lime-500/40 shadow-lg"
-                    : "bg-[var(--surface)] border-[var(--border)]"
-                }`}
-              >
-                {plan.highlight && <Badge variant="lime" className="self-start">Recommandé</Badge>}
-                <div>
-                  <h3 className="font-display font-black text-lg text-[var(--text-primary)]">{plan.name}</h3>
-                  <p className="text-xs text-[var(--text-tertiary)]">{plan.description}</p>
-                </div>
-                <div className="flex items-baseline gap-1">
-                  <span className="font-mono font-black text-2xl text-[var(--text-primary)]">{plan.price}</span>
-                  <span className="text-xs text-[var(--text-tertiary)]">Ar{plan.period}</span>
-                </div>
-                <ul className="flex flex-col gap-2 flex-1">
-                  {[plan.storage, plan.domains, plan.emails, plan.databases, plan.bandwidth].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                      <span className="text-lime-500 mt-0.5 shrink-0">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                  <li className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                    <span className="text-lime-500 mt-0.5 shrink-0">✓</span>
-                    SSL gratuit inclus
-                  </li>
-                  <li className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                    <span className="text-lime-500 mt-0.5 shrink-0">✓</span>
-                    cPanel complet
-                  </li>
-                  <li className="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
-                    <span className="text-lime-500 mt-0.5 shrink-0">✓</span>
-                    Backup quotidien
-                  </li>
-                </ul>
-                <Button variant={plan.highlight ? "primary" : "secondary"} size="md" asChild className="mt-2">
-                  <Link href="/devis">Commencer</Link>
-                </Button>
-              </article>
-            ))}
-          </div>
-          <p className="text-center text-xs text-[var(--text-tertiary)] mt-6">
-            Engagement mensuel ou annuel (–2 mois offerts). Migration depuis votre hébergeur actuel incluse.
-          </p>
         </div>
       </section>
 
