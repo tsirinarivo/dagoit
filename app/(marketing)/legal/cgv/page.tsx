@@ -14,7 +14,7 @@ export default function CGVPage() {
           Conditions Générales de Vente
         </h1>
         <p className="text-sm text-[var(--text-tertiary)] mb-12">
-          Dernière mise à jour : janvier 2025
+          Dernière mise à jour : octobre 2026
         </p>
 
         <div className="space-y-10 text-[var(--text-secondary)]">

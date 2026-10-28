@@ -156,7 +156,7 @@ export default function RessourcesPage() {
                   {cat.articles.map((article) => (
                     <article
                       key={article.title}
-                      className="flex flex-col gap-3 p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-cyan-500/20 transition-all duration-200 cursor-pointer group"
+                      className="flex flex-col gap-3 p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] opacity-80"
                     >
                       <div className="flex items-center justify-between">
                         <span className={`text-xs px-2 py-0.5 rounded-md font-medium ${tagColorMap[article.tag] ?? "bg-[var(--bg-tertiary)] text-[var(--text-tertiary)]"}`}>
@@ -164,14 +164,14 @@ export default function RessourcesPage() {
                         </span>
                         <span className="text-xs text-[var(--text-tertiary)]">{article.readTime}</span>
                       </div>
-                      <h3 className="font-display font-semibold text-sm text-[var(--text-primary)] leading-snug group-hover:text-cyan-400 transition-colors">
+                      <h3 className="font-display font-semibold text-sm text-[var(--text-primary)] leading-snug">
                         {article.title}
                       </h3>
                       <p className="text-xs text-[var(--text-secondary)] leading-relaxed flex-1">
                         {article.excerpt}
                       </p>
-                      <span className="text-xs text-cyan-500 flex items-center gap-1 mt-auto">
-                        Lire l'article <ArrowRight className="h-3 w-3" />
+                      <span className="text-xs text-[var(--text-tertiary)] italic mt-auto">
+                        Bientôt disponible
                       </span>
                     </article>
                   ))}

@@ -8,13 +8,12 @@ export const revalidate = 120;
 export const metadata: Metadata = {
   title: "Boutique GPS & Accessoires Tech — DAGO IT Madagascar",
   description:
-    "Achetez vos traceurs GPS, routeurs WiFi 4G, montres connectées et systèmes d'alarme. Paiement Mvola, Orange Money, carte bancaire. Livraison Antananarivo.",
+    "Achetez vos traceurs GPS, routeurs WiFi 4G, montres connectées. Paiement Mvola, Orange Money, carte bancaire. Livraison Madagascar.",
   keywords: [
     "achat traceur GPS Madagascar",
     "traceur GPS prix Madagascar",
     "routeur WiFi 4G Madagascar",
     "montre GPS enfant Madagascar",
-    "alarme maison Madagascar",
   ],
 };
 

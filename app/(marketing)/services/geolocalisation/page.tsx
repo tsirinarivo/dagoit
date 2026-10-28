@@ -9,7 +9,7 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const metadata: Metadata = {
   title: "Géolocalisation GPS Véhicules Madagascar — DAGO IT",
   description:
-    "Suivez votre flotte en temps réel à Madagascar. Coupe-moteur, géofencing, alertes SMS. Dès 32 500 Ar/mois + matériel. Installation à Antananarivo.",
+    "Suivez votre flotte en temps réel à Madagascar. Coupe-moteur, géofencing, alertes SMS. Dès 32 500 Ar/mois + matériel. Installation sur site.",
   keywords: [
     "géolocalisation GPS Madagascar",
     "traceur GPS flotte Madagascar",
@@ -110,7 +110,7 @@ const USE_CASES = [
 const FAQ = [
   {
     q: "Combien de temps dure l'installation du traceur GPS ?",
-    a: "L'installation prend entre 45 minutes et 1h30 selon le type de véhicule. Nos techniciens interviennent à Antananarivo et dans les environs. Pour les flottes de 5 véhicules et plus, nous pouvons nous déplacer dans d'autres villes (Toamasina, Antsirabe, Mahajanga).",
+    a: "L'installation prend entre 45 minutes et 1h30 selon le type de véhicule. Nos techniciens interviennent à Toamasina et à Antananarivo. Pour les flottes de 5 véhicules et plus, nous pouvons nous déplacer dans d'autres villes (Antsirabe, Mahajanga, Fianarantsoa, Toliara) sur devis.",
   },
   {
     q: "Le traceur fonctionne-t-il partout à Madagascar ?",

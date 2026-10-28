@@ -8,11 +8,11 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const metadata: Metadata = {
   title: "Hébergement Web Madagascar — Serveurs Locaux DAGO IT",
   description:
-    "Hébergement web rapide et fiable à Madagascar. Serveurs locaux Antananarivo, uptime 99.9%, cPanel, SSL gratuit, emails professionnels. Support en malgache et français.",
+    "Hébergement web rapide et fiable à Madagascar. Infrastructure locale, uptime élevé, cPanel, SSL gratuit, emails professionnels. Support en malgache et français.",
   keywords: [
     "hébergement web Madagascar",
     "hébergeur Madagascar",
-    "serveur local Antananarivo",
+    "serveur local Madagascar",
     "nom de domaine Madagascar",
     "email professionnel Madagascar",
   ],
@@ -27,7 +27,7 @@ const FEATURES = [
     icon: <Server className="h-6 w-6" />,
     title: "Serveurs locaux Madagascar",
     description:
-      "Infrastructure hébergée à Antananarivo pour une latence minimale. Vos visiteurs malgaches bénéficient de temps de chargement 3 à 5× plus rapides qu'avec un hébergeur européen.",
+      "Infrastructure hébergée localement à Madagascar pour une latence minimale. Vos visiteurs malgaches bénéficient de temps de chargement nettement plus rapides qu'avec un hébergeur européen.",
     color: "cyan",
   },
   {
@@ -125,8 +125,8 @@ export default function HebergementWebPage() {
             </h1>
 
             <p className="text-lg text-[var(--text-secondary)] leading-relaxed mb-8 max-w-lg">
-              Vos visiteurs malgaches méritent un site rapide. Nos serveurs locaux à Antananarivo garantissent une latence 5× inférieure aux hébergeurs européens.{" "}
-              <strong className="text-[var(--text-primary)]">Dès 25 000 Ar/mois.</strong>
+              Vos visiteurs malgaches méritent un site rapide. Nos serveurs locaux à Madagascar garantissent une latence nettement inférieure aux hébergeurs européens.{" "}
+              <strong className="text-[var(--text-primary)]">Devis sur demande.</strong>
             </p>
 
             <div className="flex flex-wrap gap-3">

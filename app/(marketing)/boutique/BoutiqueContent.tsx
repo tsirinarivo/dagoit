@@ -640,7 +640,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
           </h1>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-sm">
             Traceurs GPS, routeurs WiFi 4G, montres connectées. Paiement Mvola,
-            Orange Money, Airtel Money. Livraison à Antananarivo et en régions.
+            Orange Money, Airtel Money. Livraison à Toamasina, Antananarivo et en régions.
           </p>
         </div>
       </section>
@@ -860,7 +860,7 @@ export function BoutiqueContent({ products }: { products: Product[] }) {
             {[
               {
                 icon: "🚚",
-                title: "Livraison Antananarivo",
+                title: "Livraison Madagascar",
                 desc: "Gratuite à partir de 100 000 Ar. Livraison J+1 à Tana.",
               },
               {

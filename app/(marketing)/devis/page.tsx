@@ -18,7 +18,7 @@ const GUARANTEES = [
   "Réponse sous 24h ouvrées",
   "Devis gratuit et sans engagement",
   "Conseiller dédié pour votre projet",
-  "Visite technique offerte (Antananarivo)",
+  "Visite technique offerte",
 ];
 
 export default function DevisPage() {

@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/services/geolocalisation`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/services/hebergement-web`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/a-propos`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/ressources`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE}/ressources`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${BASE}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.8 },
     { url: `${BASE}/devis`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/legal/cgv`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

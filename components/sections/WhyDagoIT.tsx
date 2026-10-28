@@ -61,7 +61,7 @@ const FEATURES: Feature[] = [
     icon: <Clock className="h-6 w-6" />,
     title: "Installation en 1h",
     description:
-      "Nos techniciens se déplacent à Antananarivo pour installer le boîtier GPS sur votre véhicule. Opérationnel en moins d'une heure.",
+      "Nos techniciens se déplacent pour installer le boîtier GPS sur votre véhicule. Opérationnel en moins d'une heure.",
     accent: "lime",
   },
 ];

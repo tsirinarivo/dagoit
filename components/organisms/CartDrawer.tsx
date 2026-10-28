@@ -167,7 +167,7 @@ export function CartDrawer() {
                   </span>
                 </div>
                 <p className="text-xs text-[var(--text-tertiary)]">
-                  Livraison gratuite à Antananarivo. Frais selon zone pour les régions.
+                  Livraison selon zone. Devis sur demande pour les régions.
                 </p>
                 <Button variant="primary" size="lg" className="w-full" onClick={closeCart} asChild>
                   <Link href="/checkout">

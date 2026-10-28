@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "hébergement web Madagascar",
     "dago-it",
     "DAGO IT",
-    "GPS tracker Antananarivo",
+    "GPS tracker Toamasina",
   ],
   authors: [{ name: "DAGO IT", url: "https://dago-it.com" }],
   creator: "DAGO IT",

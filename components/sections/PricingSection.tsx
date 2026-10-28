@@ -81,7 +81,7 @@ export function PricingSection() {
           </h2>
           <p className="text-[var(--text-secondary)] max-w-lg mx-auto mb-8">
             Matériel traceur GPS inclus (250 000 à 280 000 Ar selon le plan).
-            Installation par nos techniciens à Antananarivo.
+            Installation par nos techniciens sur site.
           </p>
 
           {/* Toggle mensuel / annuel */}

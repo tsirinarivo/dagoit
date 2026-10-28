@@ -4,7 +4,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dago-it.com";
 const BOUTIQUE_ENABLED = process.env.NEXT_PUBLIC_BOUTIQUE_ENABLED !== "false";
 
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/compte/", "/api/", "/checkout", "/maintenance"];
+  const disallow = ["/compte/", "/api/", "/checkout", "/maintenance", "/ressources/"];
   if (!BOUTIQUE_ENABLED) disallow.push("/boutique", "/boutique/");
 
   return {
